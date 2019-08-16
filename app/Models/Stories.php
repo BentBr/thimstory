@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use thimstory\Models\Concerns\UsesUuid;
 use Illuminate\Database\Eloquent;
 
-
 class Stories extends Model
 {
     use SoftDeletes;
@@ -21,6 +20,7 @@ class Stories extends Model
     protected $fillable = [
         'userId',
         'name',
+        'url_name',
         'views',
         'follower',
     ];

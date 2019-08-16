@@ -18,6 +18,7 @@ class CreateStoriesTable extends Migration
             $table->uuid('id')->unique();
             $table->uuid('user_id');
             $table->string('name');
+            $table->string('url_name');
             $table->integer('views')->default(0);
             $table->integer('follower')->default(0);
             $table->timestamps();
