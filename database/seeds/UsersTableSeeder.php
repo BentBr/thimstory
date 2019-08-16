@@ -17,6 +17,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'id'        => '04c6290b-94bb-400e-900e-1a4b34e8b8a5',
             'name'      => 'Bent',
+            'url_name'  => rawurlencode('Bent'),
             'email'     => 'mail@bent-brueggemann.de',
             'password'  => bcrypt('password'),
 
@@ -26,6 +27,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'id'        => '04c6290b-94bb-400e-900e-1a4b34e34565',
             'name'      => 'Bent Test1',
+            'url_name'  => rawurlencode('Bent Test1'),
             'email'     => 'bent@bent-brueggemann.de',
             'password'  => bcrypt('password'),
 
