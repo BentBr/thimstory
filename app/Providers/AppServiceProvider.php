@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace thimstory\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

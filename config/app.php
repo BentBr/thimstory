@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'thimstory'),
 
     /*
     |--------------------------------------------------------------------------
@@ -175,11 +175,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        thimstory\Providers\AppServiceProvider::class,
+        thimstory\Providers\AuthServiceProvider::class,
+        // thimstory\Providers\BroadcastServiceProvider::class,
+        thimstory\Providers\EventServiceProvider::class,
+        thimstory\Providers\RouteServiceProvider::class,
 
     ],
 
