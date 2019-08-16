@@ -15,7 +15,7 @@ class StoryTableSeeder extends Seeder
     {
         DB::table('stories')->insert([
             'id'        => '12c6290b-94bb-400e-900e-1a4b34e8b8a5',
-            'userId'    => '04c6290b-94bb-400e-900e-1a4b34e8b8a5',
+            'user_id'    => '04c6290b-94bb-400e-900e-1a4b34e8b8a5',
             'name'      => 'Bent Story number #1',
             'views'     => '13',
             'follower'  => '0',
@@ -24,14 +24,14 @@ class StoryTableSeeder extends Seeder
 
         DB::table('story_details')->insert([
             'id'        => Uuid::uuid4(),
-            'storyId'    => '12c6290b-94bb-400e-900e-1a4b34e8b8a5',
+            'story_id'    => '12c6290b-94bb-400e-900e-1a4b34e8b8a5',
             'views'     => '133778',
 
         ]);
 
         DB::table('subscriptions')->insert([
-            'storyId'    => '12c6290b-94bb-400e-900e-1a4b34e8b8a5',
-            'userId'     => '04c6290b-94bb-400e-900e-1a4b34e8b8a5',
+            'story_id'    => '12c6290b-94bb-400e-900e-1a4b34e8b8a5',
+            'user_id'     => '04c6290b-94bb-400e-900e-1a4b34e8b8a5',
         ]);
     }
 }

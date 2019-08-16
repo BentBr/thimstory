@@ -7,6 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use thimstory\Models\Concerns\UsesUuid;
+use Illuminate\Database\Eloquent;
 
 class User extends Authenticatable
 {
@@ -40,4 +41,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * @return Eloquent\Relations\HasMany
+     */
+    public function stories()
+    {
+        return $this->HasMany('\thimstory\Models\Stories');
+    }
+
+    /**
+     * @return Eloquent\Relations\HasMany
+     */
+    public function subscriptions()
+    {
+        return $this->HasMany('\thimstory\Models\Subscriptions');
+    }
 }

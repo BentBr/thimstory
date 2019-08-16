@@ -16,7 +16,7 @@ class CreateStoriesTable extends Migration
         //table for stories
         Schema::create('stories', function (Blueprint $table) {
             $table->uuid('id')->unique();
-            $table->uuid('userId');
+            $table->uuid('user_id');
             $table->string('name');
             $table->integer('views')->default(0);
             $table->integer('follower')->default(0);
@@ -24,20 +24,20 @@ class CreateStoriesTable extends Migration
             $table->softDeletes();
 
             //foreign keys
-            $table->foreign('userId')->references('id')->on('users')
+            $table->foreign('user_id')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');
         });
 
         //table for story details
         Schema::create('story_details', function (Blueprint $table) {
             $table->uuid('id')->unique();
-            $table->uuid('storyId');
+            $table->uuid('story_id');
             $table->integer('views')->default(0);
             $table->timestamps();
             $table->softDeletes();
 
             //foreign keys
-            $table->foreign('storyId')->references('id')->on('stories')
+            $table->foreign('story_id')->references('id')->on('stories')
                 ->onUpdate('cascade')->onDelete('cascade');
         });
 

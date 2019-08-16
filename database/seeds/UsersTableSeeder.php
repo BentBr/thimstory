@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use thimstory\Models\User;
-use Ramsey\Uuid\Uuid;
 
 class UsersTableSeeder extends Seeder
 {

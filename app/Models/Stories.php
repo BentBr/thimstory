@@ -5,6 +5,8 @@ namespace thimstory\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use thimstory\Models\Concerns\UsesUuid;
+use Illuminate\Database\Eloquent;
+
 
 class Stories extends Model
 {
@@ -22,4 +24,28 @@ class Stories extends Model
         'views',
         'follower',
     ];
+
+    /**
+     * @return Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo('\thimstory\Models\User');
+    }
+
+    /**
+     * @return Eloquent\Relations\HasMany
+     */
+    public function storyDetails()
+    {
+        return $this->HasMany('\thimstory\Models\StoryDetails');
+    }
+
+    /**
+     * @return Eloquent\Relations\HasMany
+     */
+    public function subscriptions()
+    {
+        return $this->HasMany('\thimstory\Models\Subscriptions');
+    }
 }
