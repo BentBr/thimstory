@@ -23,19 +23,19 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 
 import Vuetify, {
-    VCard,
-    VRating,
-    VToolbar,
     VApp,
+    VList,
+    VListItem,
+    VListItemTitle,
 } from 'vuetify/lib'
 import { Ripple } from 'vuetify/lib/directives'
 
 Vue.use(Vuetify, {
     components: {
-        VCard,
-        VRating,
-        VToolbar,
-        VApp
+        VApp,
+        VList,
+        VListItem,
+        VListItemTitle,
     },
     directives: {
         Ripple,

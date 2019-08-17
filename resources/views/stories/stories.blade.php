@@ -12,18 +12,18 @@
                             This is {{ Route::currentRouteName() }} path
                         </div>
 
+                        <a href="/{{ rawurlencode($user->name) }}">{{ $user->name }}</a>
                         <h2>Stories</h2>
                         @if(isset($stories))
                             @foreach($stories as $story)
-                                {{ $story->name }}
-                            <br>
+                                <a href="/{{ $user->url_name }}/{{ $story->url_name }}">{{ $story->name }}</a>
+                                <br>
                                 {{ $story->id }}
+
                                 <br>
                                 <br>
                             @endforeach
                         @endif
-
-
 
                     </div>
                 </div>

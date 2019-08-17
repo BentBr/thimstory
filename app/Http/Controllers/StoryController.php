@@ -24,6 +24,7 @@ class StoryController extends Controller
         //getting requested data
         $data['user'] = User::getUserByUsername($username);
         $data['story'] = Stories::getStoryByUrlName($data['user']->id, $story);
+        $data['storyDetails'] = $data['story']->storyDetails;
 
         return view('stories.story', $data);
     }

@@ -12,11 +12,18 @@
                             This is {{ Route::currentRouteName() }} path
                         </div>
 
-                        <h2>Stories</h2>
+                        <h2>Details of one Story, Story overview</h2>
                         @if(isset($story))
                             {{ $story->name }}
                             <br>
                             {{ $story->id }}
+                            @if(isset($storyDetails))
+                                <h3>These are the story details</h3>
+                                @foreach($storyDetails as $storyDetail)
+                                <a href="/{{ $user->url_name }}/{{ $story->url_name }}/{{ $storyDetail->story_counter }}">{{ $storyDetail->story_counter }}</a>
+
+                                @endforeach
+                            @endif
                             <br>
                             <br>
                         @endif
