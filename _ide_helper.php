@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.8.31 on 2019-08-10 21:39:57.
+ * Generated for Laravel 5.8.31 on 2019-08-17 21:06:44.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -1488,7 +1488,7 @@ namespace Illuminate\Support\Facades {
         public static function handle($input, $output = null)
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-                        /** @var \App\Console\Kernel $instance */
+                        /** @var \thimstory\Console\Kernel $instance */
                         return $instance->handle($input, $output);
         }
         
@@ -1503,7 +1503,7 @@ namespace Illuminate\Support\Facades {
         public static function terminate($input, $status)
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-                        /** @var \App\Console\Kernel $instance */
+                        /** @var \thimstory\Console\Kernel $instance */
                         $instance->terminate($input, $status);
         }
         
@@ -1518,7 +1518,7 @@ namespace Illuminate\Support\Facades {
         public static function command($signature, $callback)
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-                        /** @var \App\Console\Kernel $instance */
+                        /** @var \thimstory\Console\Kernel $instance */
                         return $instance->command($signature, $callback);
         }
         
@@ -1532,7 +1532,7 @@ namespace Illuminate\Support\Facades {
         public static function registerCommand($command)
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-                        /** @var \App\Console\Kernel $instance */
+                        /** @var \thimstory\Console\Kernel $instance */
                         $instance->registerCommand($command);
         }
         
@@ -1549,7 +1549,7 @@ namespace Illuminate\Support\Facades {
         public static function call($command, $parameters = array(), $outputBuffer = null)
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-                        /** @var \App\Console\Kernel $instance */
+                        /** @var \thimstory\Console\Kernel $instance */
                         return $instance->call($command, $parameters, $outputBuffer);
         }
         
@@ -1564,7 +1564,7 @@ namespace Illuminate\Support\Facades {
         public static function queue($command, $parameters = array())
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-                        /** @var \App\Console\Kernel $instance */
+                        /** @var \thimstory\Console\Kernel $instance */
                         return $instance->queue($command, $parameters);
         }
         
@@ -1577,7 +1577,7 @@ namespace Illuminate\Support\Facades {
         public static function all()
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-                        /** @var \App\Console\Kernel $instance */
+                        /** @var \thimstory\Console\Kernel $instance */
                         return $instance->all();
         }
         
@@ -1590,7 +1590,7 @@ namespace Illuminate\Support\Facades {
         public static function output()
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-                        /** @var \App\Console\Kernel $instance */
+                        /** @var \thimstory\Console\Kernel $instance */
                         return $instance->output();
         }
         
@@ -1603,7 +1603,7 @@ namespace Illuminate\Support\Facades {
         public static function bootstrap()
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-                        /** @var \App\Console\Kernel $instance */
+                        /** @var \thimstory\Console\Kernel $instance */
                         $instance->bootstrap();
         }
         
@@ -1617,7 +1617,7 @@ namespace Illuminate\Support\Facades {
         public static function setArtisan($artisan)
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-                        /** @var \App\Console\Kernel $instance */
+                        /** @var \thimstory\Console\Kernel $instance */
                         $instance->setArtisan($artisan);
         }
          
@@ -14570,6 +14570,213 @@ namespace Illuminate\Support {
  
 }
 
+namespace Sentry\Laravel { 
+
+    /**
+     * 
+     *
+     */ 
+    class Facade {
+        
+        /**
+         * Gets the client bound to the top of the stack.
+         *
+         * @return \Sentry\State\ClientInterface|null 
+         * @static 
+         */ 
+        public static function getClient()
+        {
+                        /** @var \Sentry\State\Hub $instance */
+                        return $instance->getClient();
+        }
+        
+        /**
+         * Gets the ID of the last captured event.
+         *
+         * @return string|null 
+         * @static 
+         */ 
+        public static function getLastEventId()
+        {
+                        /** @var \Sentry\State\Hub $instance */
+                        return $instance->getLastEventId();
+        }
+        
+        /**
+         * Creates a new scope to store context information that will be layered on
+         * top of the current one. It is isolated, i.e. all breadcrumbs and context
+         * information added to this scope will be removed once the scope ends. Be
+         * sure to always remove this scope with {@see Hub::popScope} when the
+         * operation finishes or throws.
+         *
+         * @return \Sentry\State\Scope 
+         * @static 
+         */ 
+        public static function pushScope()
+        {
+                        /** @var \Sentry\State\Hub $instance */
+                        return $instance->pushScope();
+        }
+        
+        /**
+         * Removes a previously pushed scope from the stack. This restores the state
+         * before the scope was pushed. All breadcrumbs and context information added
+         * since the last call to {@see Hub::pushScope} are discarded.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function popScope()
+        {
+                        /** @var \Sentry\State\Hub $instance */
+                        return $instance->popScope();
+        }
+        
+        /**
+         * Creates a new scope with and executes the given operation within. The scope
+         * is automatically removed once the operation finishes or throws.
+         *
+         * @param callable $callback The callback to be executed
+         * @static 
+         */ 
+        public static function withScope($callback)
+        {
+                        /** @var \Sentry\State\Hub $instance */
+                        return $instance->withScope($callback);
+        }
+        
+        /**
+         * Calls the given callback passing to it the current scope so that any
+         * operation can be run within its context.
+         *
+         * @param callable $callback The callback to be executed
+         * @static 
+         */ 
+        public static function configureScope($callback)
+        {
+                        /** @var \Sentry\State\Hub $instance */
+                        return $instance->configureScope($callback);
+        }
+        
+        /**
+         * Binds the given client to the current scope.
+         *
+         * @param \Sentry\State\ClientInterface $client The client
+         * @static 
+         */ 
+        public static function bindClient($client)
+        {
+                        /** @var \Sentry\State\Hub $instance */
+                        return $instance->bindClient($client);
+        }
+        
+        /**
+         * Captures a message event and sends it to Sentry.
+         *
+         * @param string $message The message
+         * @param \Sentry\State\Severity $level The severity level of the message
+         * @return string|null 
+         * @static 
+         */ 
+        public static function captureMessage($message, $level = null)
+        {
+                        /** @var \Sentry\State\Hub $instance */
+                        return $instance->captureMessage($message, $level);
+        }
+        
+        /**
+         * Captures an exception event and sends it to Sentry.
+         *
+         * @param \Throwable $exception The exception
+         * @return string|null 
+         * @static 
+         */ 
+        public static function captureException($exception)
+        {
+                        /** @var \Sentry\State\Hub $instance */
+                        return $instance->captureException($exception);
+        }
+        
+        /**
+         * Captures a new event using the provided data.
+         *
+         * @param array $payload The data of the event being captured
+         * @return string|null 
+         * @static 
+         */ 
+        public static function captureEvent($payload)
+        {
+                        /** @var \Sentry\State\Hub $instance */
+                        return $instance->captureEvent($payload);
+        }
+        
+        /**
+         * Captures an event that logs the last occurred error.
+         *
+         * @return string|null 
+         * @static 
+         */ 
+        public static function captureLastError()
+        {
+                        /** @var \Sentry\State\Hub $instance */
+                        return $instance->captureLastError();
+        }
+        
+        /**
+         * Records a new breadcrumb which will be attached to future events. They
+         * will be added to subsequent events to provide more context on user's
+         * actions prior to an error or crash.
+         *
+         * @param \Sentry\State\Breadcrumb $breadcrumb The breadcrumb to record
+         * @return bool Whether the breadcrumb was actually added to the current scope
+         * @static 
+         */ 
+        public static function addBreadcrumb($breadcrumb)
+        {
+                        /** @var \Sentry\State\Hub $instance */
+                        return $instance->addBreadcrumb($breadcrumb);
+        }
+        
+        /**
+         * Returns the current global Hub.
+         *
+         * @return self 
+         * @static 
+         */ 
+        public static function getCurrent()
+        {
+                        return \Sentry\State\Hub::getCurrent();
+        }
+        
+        /**
+         * Sets the Hub as the current.
+         *
+         * @param self $hub The Hub that will become the current one
+         * @return self 
+         * @static 
+         */ 
+        public static function setCurrent($hub)
+        {
+                        return \Sentry\State\Hub::setCurrent($hub);
+        }
+        
+        /**
+         * Gets the integration whose FQCN matches the given one if it's available on the current client.
+         *
+         * @param string $className The FQCN of the integration
+         * @return \Sentry\State\IntegrationInterface|null 
+         * @static 
+         */ 
+        public static function getIntegration($className)
+        {
+                        /** @var \Sentry\State\Hub $instance */
+                        return $instance->getIntegration($className);
+        }
+         
+    }
+ 
+}
+
 
 namespace  { 
 
@@ -17350,6 +17557,8 @@ namespace  {
     class Validator extends \Illuminate\Support\Facades\Validator {}
 
     class View extends \Illuminate\Support\Facades\View {}
+
+    class Sentry extends \Sentry\Laravel\Facade {}
  
 }
 
