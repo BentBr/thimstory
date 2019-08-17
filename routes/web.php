@@ -18,7 +18,10 @@
 //Route::get('/home', 'HomeController@index')->name('home');
 
 //marketing & generic
-Route::get('/', 'ContentController@home')->name('home');
+Route::get('/', 'ContentController@home')->name('home'); //done
+Route::get('/imprint', 'ContentController@imprint')->name('imprint'); //done
+Route::get('/privacy-policy', 'ContentController@privacyPolicy')->name('privacy-policy'); //done
+Route::get('/about', 'ContentController@about')->name('about'); //done
 
 //auth middleware: only authenticated users
 Route::middleware('auth')->group(function () {

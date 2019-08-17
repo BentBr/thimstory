@@ -1,3 +1,10 @@
+
+<nav>
+    <a href="{{ Route('home') }}">Home</a>
+    <a href="{{ Route('imprint') }}">Imprint</a>
+    <a href="{{ Route('about') }}">About</a>
+    <a href="{{ Route('privacy-policy') }}">Privacy Policy</a>
+</nav>
 @auth()
     <span>You are logged in!</span>
     <v-list>

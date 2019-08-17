@@ -17,11 +17,13 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @include('layouts.matomo-header')
 </head>
 <body>
+    @include('layouts.matomo-body')
     <v-app id="app">
 
-        @include('menus.top_navbar')
+        @include('menus.top-navbar')
 
         <main class="py-4">
             @yield('content')
