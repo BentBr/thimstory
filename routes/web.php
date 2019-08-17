@@ -11,29 +11,46 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
+});*/
+//Auth::routes();
+//Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+//auth middleware: only authenticated users
+Route::middleware('auth')->group(function () {
+
+    //users auth
+    Route::get('/logout', 'UserController@logout')->name('logout');
+    Route::patch('/user', 'UserController@patchUser');
+    Route::delete('/user', 'UserController@deleteUser');
 });
 
-//Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
 //users
-Route::get('/logout', 'UserController@logout')->name('logout');
 Route::get('/login', 'UserController@login')->name('login');
+Route::put('/login', 'UserController@putLogin')->name('login');
+Route::get('/login/{token}', 'UserController@userLoginToken');
 Route::get('/register', 'UserController@register')->name('register');
+Route::put('/register', 'UserController@putUser');
 Route::get('/{username}', 'UserController@profile')->name('profile'); //done
 
 //stories
 Route::get('/{username}/stories', 'StoryController@stories')->name('stories'); //done
 Route::get('/{username}/{story}', 'StoryController@story')->name('story'); //done
 Route::get('/{username}/{story}/{storyCounter}', 'StoryController@storyDetail')->name('storyDetail'); //done
-Route::put('/story', 'StoryController@putStory');
-Route::patch('/story', 'StoryController@patchStory');
-Route::delete('/story', 'StoryController@deleteStory');
 
-//subscriptions
-Route::put('/subscription/{storyId}', 'SubscriptionController@putSubscription');
-Route::get('/subscriptions', 'SubscriptionController@getSubscriptions');
+//auth middleware: only authenticated users
+Route::middleware('auth')->group(function () {
+
+    //stories auth
+    Route::put('/story', 'StoryController@putStory');
+    Route::patch('/story', 'StoryController@patchStory');
+    Route::delete('/story', 'StoryController@deleteStory');
+
+    //subscriptions auth
+    Route::put('/subscription/{storyId}', 'SubscriptionController@putSubscription');
+    Route::get('/subscriptions', 'SubscriptionController@getSubscriptions');
+});
 
