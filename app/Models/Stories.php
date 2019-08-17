@@ -48,4 +48,11 @@ class Stories extends Model
     {
         return $this->HasMany('\thimstory\Models\Subscriptions');
     }
+
+    public static function getStoryByUrlName($userId, $story)
+    {
+        return Stories::where('user_id', $userId)
+            ->where('name', $story)
+            ->firstOrFail();
+    }
 }

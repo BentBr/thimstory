@@ -15,13 +15,14 @@ class CreateSubscriptionsTable extends Migration
     {
         //table for stories
         Schema::create('subscriptions', function (Blueprint $table) {
-            $table->uuid('story_id');
+            $table->uuid('id')->primary();
+            $table->uuid('stories_id');
             $table->uuid('user_id');
             $table->boolean('update')->default(0);
             $table->timestamps();
 
             //foreign keys
-            $table->foreign('story_id')->references('id')->on('stories')
+            $table->foreign('stories_id')->references('id')->on('stories')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');

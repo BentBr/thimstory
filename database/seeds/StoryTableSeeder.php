@@ -25,13 +25,15 @@ class StoryTableSeeder extends Seeder
 
         DB::table('story_details')->insert([
             'id'        => Uuid::uuid4(),
-            'story_id'    => '12c6290b-94bb-400e-900e-1a4b34e8b8a5',
+            'story_counter'=> 0,
+            'stories_id'    => '12c6290b-94bb-400e-900e-1a4b34e8b8a5',
             'views'     => '133778',
 
         ]);
 
         DB::table('subscriptions')->insert([
-            'story_id'    => '12c6290b-94bb-400e-900e-1a4b34e8b8a5',
+            'id'          => Uuid::uuid4(),
+            'stories_id'    => '12c6290b-94bb-400e-900e-1a4b34e8b8a5',
             'user_id'     => '04c6290b-94bb-400e-900e-1a4b34e8b8a5',
         ]);
     }

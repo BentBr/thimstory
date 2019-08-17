@@ -16,8 +16,8 @@ class Subscriptions extends Model
      * @var array
      */
     protected $fillable = [
-        'storyId',
-        'userId',
+        'story_id',
+        'user_id',
         'update',
     ];
 

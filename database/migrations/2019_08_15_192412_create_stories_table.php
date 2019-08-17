@@ -32,13 +32,14 @@ class CreateStoriesTable extends Migration
         //table for story details
         Schema::create('story_details', function (Blueprint $table) {
             $table->uuid('id')->unique();
-            $table->uuid('story_id');
+            $table->integer('story_counter');
+            $table->uuid('stories_id');
             $table->integer('views')->default(0);
             $table->timestamps();
             $table->softDeletes();
 
             //foreign keys
-            $table->foreign('story_id')->references('id')->on('stories')
+            $table->foreign('stories_id')->references('id')->on('stories')
                 ->onUpdate('cascade')->onDelete('cascade');
         });
 
