@@ -3,6 +3,7 @@
 namespace thimstory\Http\Controllers;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use thimstory\Events\UserLogin;
 use thimstory\Events\UserRegister;
 use thimstory\Models\User;
@@ -13,6 +14,8 @@ use Str;
 
 class UserController extends Controller
 {
+    use AuthenticatesUsers;
+
     //shows profile view of requested user
     public function profile($username)
     {
@@ -71,7 +74,46 @@ class UserController extends Controller
             }
         }
 
-
         return view('users.login', $data);
+    }
+
+    /**
+     * Login with token /login/{token}
+     *
+     * @param Request $request
+     * @param $token
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function userLoginWithToken(Request $request, $token)
+    {
+        //find user via token
+        $user = User::getUserByToken($token);
+
+        //login user
+        $this->guard()->login($user, true);
+
+        //delete token
+        $user->deleteToken();
+
+        //verify email address
+        if(is_null($user->email_verified_at)) {
+
+            $user->verifyEmail();
+        }
+
+        return redirect('/'. $user->url_name . '/stories');
+    }
+
+    /**
+     * Users Logout
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function logout()
+    {
+        //logout user
+        $this->guard()->logout();
+
+        return redirect(Route('home'));
     }
 }

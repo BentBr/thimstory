@@ -72,4 +72,34 @@ class User extends Authenticatable
         return User::where('email', $userEmail)
                 ->firstOrFail();
     }
+
+    public static function getUserByToken($token)
+    {
+        return User::where('remember_token', $token)
+                ->firstOrFail();
+    }
+
+    /**
+     * Deletes token of current user. preferably after successfully login
+     *
+     * @return void
+     */
+    public function deleteToken()
+    {
+        $this->forceFill([
+            'remember_token'    => null,
+        ])->save();
+    }
+
+    /**
+     * verifies email address of current user by setting timestamp = now
+     *
+     * @return void
+     */
+    public function verifyEmail()
+    {
+        $this->forceFill([
+            'email_verified_at' => now(),
+        ])->save();
+    }
 }

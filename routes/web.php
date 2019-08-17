@@ -17,11 +17,14 @@
 //Auth::routes();
 //Route::get('/home', 'HomeController@index')->name('home');
 
+//marketing & generic
+Route::get('/', 'ContentController@home')->name('home');
+
 //auth middleware: only authenticated users
 Route::middleware('auth')->group(function () {
 
     //users auth
-    Route::get('/logout', 'UserController@logout')->name('logout');
+    Route::get('/logout', 'UserController@logout')->name('logout'); //done
     Route::patch('/user', 'UserController@patchUser');
     Route::delete('/user', 'UserController@deleteUser');
 });
@@ -29,7 +32,7 @@ Route::middleware('auth')->group(function () {
 //users
 Route::get('/login', 'UserController@login')->name('login'); //done
 Route::put('/login', 'UserController@putLogin')->name('login'); //done
-Route::get('/login/{token}', 'UserController@userLoginToken');
+Route::get('/login/{token}', 'UserController@userLoginWithToken'); //done
 Route::get('/{username}', 'UserController@profile')->name('profile'); //done
 
 //stories
