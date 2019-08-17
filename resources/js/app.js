@@ -20,6 +20,7 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('login-form-component', require('./components/LoginFormComponent.vue').default);
 
 
 import Vuetify, {
@@ -27,6 +28,11 @@ import Vuetify, {
     VList,
     VListItem,
     VListItemTitle,
+    VForm,
+    VContainer,
+    VRow,
+    VCol,
+    VTextField,
 } from 'vuetify/lib'
 import { Ripple } from 'vuetify/lib/directives'
 
@@ -36,6 +42,11 @@ Vue.use(Vuetify, {
         VList,
         VListItem,
         VListItemTitle,
+        VForm,
+        VContainer,
+        VRow,
+        VCol,
+        VTextField,
     },
     directives: {
         Ripple,

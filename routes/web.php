@@ -17,8 +17,6 @@
 //Auth::routes();
 //Route::get('/home', 'HomeController@index')->name('home');
 
-
-
 //auth middleware: only authenticated users
 Route::middleware('auth')->group(function () {
 
@@ -29,11 +27,9 @@ Route::middleware('auth')->group(function () {
 });
 
 //users
-Route::get('/login', 'UserController@login')->name('login');
-Route::put('/login', 'UserController@putLogin')->name('login');
+Route::get('/login', 'UserController@login')->name('login'); //done
+Route::put('/login', 'UserController@putLogin')->name('login'); //done
 Route::get('/login/{token}', 'UserController@userLoginToken');
-Route::get('/register', 'UserController@register')->name('register');
-Route::put('/register', 'UserController@putUser');
 Route::get('/{username}', 'UserController@profile')->name('profile'); //done
 
 //stories

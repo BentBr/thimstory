@@ -1722,6 +1722,52 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/LoginFormComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/LoginFormComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      valid: false,
+      email: '',
+      emailRules: [function (v) {
+        return !!v || 'E-mail is required';
+      }, function (v) {
+        return /.+@.+/.test(v) || 'E-mail must be valid';
+      }]
+    };
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/bootstrap/dist/js/bootstrap.js":
 /*!*****************************************************!*\
   !*** ./node_modules/bootstrap/dist/js/bootstrap.js ***!
@@ -39388,6 +39434,77 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/LoginFormComponent.vue?vue&type=template&id=6ab3315b&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/LoginFormComponent.vue?vue&type=template&id=6ab3315b&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-form",
+    {
+      model: {
+        value: _vm.valid,
+        callback: function($$v) {
+          _vm.valid = $$v
+        },
+        expression: "valid"
+      }
+    },
+    [
+      _c(
+        "v-container",
+        [
+          _c(
+            "v-row",
+            [
+              _c(
+                "v-col",
+                { attrs: { cols: "12", md: "4" } },
+                [
+                  _c("v-text-field", {
+                    attrs: {
+                      rules: _vm.emailRules,
+                      label: "E-mail",
+                      required: ""
+                    },
+                    model: {
+                      value: _vm.email,
+                      callback: function($$v) {
+                        _vm.email = $$v
+                      },
+                      expression: "email"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -78228,7 +78345,7 @@ Vuetify.version = "2.0.5";
 /*!*******************************************!*\
   !*** ./node_modules/vuetify/lib/index.js ***!
   \*******************************************/
-/*! exports provided: ClickOutside, Resize, Ripple, Scroll, Touch, colors, default, VApp, VAppBar, VAppBarNavIcon, VAlert, VAutocomplete, VAvatar, VBadge, VBanner, VBottomNavigation, VBottomSheet, VBreadcrumbs, VBreadcrumbsItem, VBreadcrumbsDivider, VBtn, VBtnToggle, VCalendar, VCalendarDaily, VCalendarWeekly, VCalendarMonthly, VCard, VCardTitle, VCardActions, VCardText, VCarousel, VCarouselItem, VCheckbox, VSimpleCheckbox, VChip, VChipGroup, VColorPicker, VColorPickerSwatches, VColorPickerCanvas, VContent, VCombobox, VCounter, VData, VDataIterator, VDataFooter, VDataTable, VEditDialog, VTableOverflow, VDataTableHeader, VSimpleTable, VVirtualTable, VDatePicker, VDatePickerTitle, VDatePickerHeader, VDatePickerDateTable, VDatePickerMonthTable, VDatePickerYears, VDialog, VDivider, VExpansionPanels, VExpansionPanel, VExpansionPanelHeader, VExpansionPanelContent, VFileInput, VFooter, VForm, VContainer, VCol, VRow, VSpacer, VLayout, VFlex, VHover, VIcon, VImg, VInput, VItem, VItemGroup, VLabel, VListItemActionText, VListItemContent, VListItemTitle, VListItemSubtitle, VList, VListGroup, VListItem, VListItemAction, VListItemAvatar, VListItemIcon, VListItemGroup, VMenu, VMessages, VNavigationDrawer, VOverflowBtn, VOverlay, VPagination, VSheet, VParallax, VPicker, VProgressCircular, VProgressLinear, VRadioGroup, VRadio, VRangeSlider, VRating, VResponsive, VSelect, VSlider, VSlideGroup, VSlideItem, VSnackbar, VSparkline, VSpeedDial, VStepper, VStepperContent, VStepperStep, VStepperHeader, VStepperItems, VSubheader, VSwitch, VSystemBar, VTabs, VTab, VTabItem, VTabsItems, VTabsSlider, VTextarea, VTextField, VTimeline, VTimelineItem, VTimePicker, VTimePickerClock, VTimePickerTitle, VToolbar, VToolbarItems, VToolbarTitle, VTooltip, VTreeview, VTreeviewNode, VWindow, VWindowItem, VCarouselTransition, VCarouselReverseTransition, VTabTransition, VTabReverseTransition, VMenuTransition, VFabTransition, VDialogTransition, VDialogBottomTransition, VFadeTransition, VScaleTransition, VScrollXTransition, VScrollXReverseTransition, VScrollYTransition, VScrollYReverseTransition, VSlideXTransition, VSlideXReverseTransition, VSlideYTransition, VSlideYReverseTransition, VExpandTransition, VExpandXTransition */
+/*! exports provided: colors, default, ClickOutside, Resize, Ripple, Scroll, Touch, VApp, VAppBar, VAppBarNavIcon, VAlert, VAutocomplete, VAvatar, VBadge, VBanner, VBottomNavigation, VBottomSheet, VBreadcrumbs, VBreadcrumbsItem, VBreadcrumbsDivider, VBtn, VBtnToggle, VCalendar, VCalendarDaily, VCalendarWeekly, VCalendarMonthly, VCard, VCardTitle, VCardActions, VCardText, VCarousel, VCarouselItem, VCheckbox, VSimpleCheckbox, VChip, VChipGroup, VColorPicker, VColorPickerSwatches, VColorPickerCanvas, VContent, VCombobox, VCounter, VData, VDataIterator, VDataFooter, VDataTable, VEditDialog, VTableOverflow, VDataTableHeader, VSimpleTable, VVirtualTable, VDatePicker, VDatePickerTitle, VDatePickerHeader, VDatePickerDateTable, VDatePickerMonthTable, VDatePickerYears, VDialog, VDivider, VExpansionPanels, VExpansionPanel, VExpansionPanelHeader, VExpansionPanelContent, VFileInput, VFooter, VForm, VContainer, VCol, VRow, VSpacer, VLayout, VFlex, VHover, VIcon, VImg, VInput, VItem, VItemGroup, VLabel, VListItemActionText, VListItemContent, VListItemTitle, VListItemSubtitle, VList, VListGroup, VListItem, VListItemAction, VListItemAvatar, VListItemIcon, VListItemGroup, VMenu, VMessages, VNavigationDrawer, VOverflowBtn, VOverlay, VPagination, VSheet, VParallax, VPicker, VProgressCircular, VProgressLinear, VRadioGroup, VRadio, VRangeSlider, VRating, VResponsive, VSelect, VSlider, VSlideGroup, VSlideItem, VSnackbar, VSparkline, VSpeedDial, VStepper, VStepperContent, VStepperStep, VStepperHeader, VStepperItems, VSubheader, VSwitch, VSystemBar, VTabs, VTab, VTabItem, VTabsItems, VTabsSlider, VTextarea, VTextField, VTimeline, VTimelineItem, VTimePicker, VTimePickerClock, VTimePickerTitle, VToolbar, VToolbarItems, VToolbarTitle, VTooltip, VTreeview, VTreeviewNode, VWindow, VWindowItem, VCarouselTransition, VCarouselReverseTransition, VTabTransition, VTabReverseTransition, VMenuTransition, VFabTransition, VDialogTransition, VDialogBottomTransition, VFadeTransition, VScaleTransition, VScrollXTransition, VScrollXReverseTransition, VScrollYTransition, VScrollYReverseTransition, VSlideXTransition, VSlideXReverseTransition, VSlideYTransition, VSlideYReverseTransition, VExpandTransition, VExpandXTransition */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -87365,6 +87482,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
+Vue.component('login-form-component', __webpack_require__(/*! ./components/LoginFormComponent.vue */ "./resources/js/components/LoginFormComponent.vue")["default"]);
 
 
 Vue.use(vuetify_lib__WEBPACK_IMPORTED_MODULE_0__["default"], {
@@ -87372,7 +87490,12 @@ Vue.use(vuetify_lib__WEBPACK_IMPORTED_MODULE_0__["default"], {
     VApp: vuetify_lib__WEBPACK_IMPORTED_MODULE_0__["VApp"],
     VList: vuetify_lib__WEBPACK_IMPORTED_MODULE_0__["VList"],
     VListItem: vuetify_lib__WEBPACK_IMPORTED_MODULE_0__["VListItem"],
-    VListItemTitle: vuetify_lib__WEBPACK_IMPORTED_MODULE_0__["VListItemTitle"]
+    VListItemTitle: vuetify_lib__WEBPACK_IMPORTED_MODULE_0__["VListItemTitle"],
+    VForm: vuetify_lib__WEBPACK_IMPORTED_MODULE_0__["VForm"],
+    VContainer: vuetify_lib__WEBPACK_IMPORTED_MODULE_0__["VContainer"],
+    VRow: vuetify_lib__WEBPACK_IMPORTED_MODULE_0__["VRow"],
+    VCol: vuetify_lib__WEBPACK_IMPORTED_MODULE_0__["VCol"],
+    VTextField: vuetify_lib__WEBPACK_IMPORTED_MODULE_0__["VTextField"]
   },
   directives: {
     Ripple: vuetify_lib_directives__WEBPACK_IMPORTED_MODULE_1__["Ripple"]
@@ -87513,6 +87636,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/LoginFormComponent.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/LoginFormComponent.vue ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _LoginFormComponent_vue_vue_type_template_id_6ab3315b_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LoginFormComponent.vue?vue&type=template&id=6ab3315b&scoped=true& */ "./resources/js/components/LoginFormComponent.vue?vue&type=template&id=6ab3315b&scoped=true&");
+/* harmony import */ var _LoginFormComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LoginFormComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/LoginFormComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _LoginFormComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _LoginFormComponent_vue_vue_type_template_id_6ab3315b_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _LoginFormComponent_vue_vue_type_template_id_6ab3315b_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "6ab3315b",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/LoginFormComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/LoginFormComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/LoginFormComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LoginFormComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./LoginFormComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/LoginFormComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LoginFormComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/LoginFormComponent.vue?vue&type=template&id=6ab3315b&scoped=true&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/LoginFormComponent.vue?vue&type=template&id=6ab3315b&scoped=true& ***!
+  \***************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LoginFormComponent_vue_vue_type_template_id_6ab3315b_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./LoginFormComponent.vue?vue&type=template&id=6ab3315b&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/LoginFormComponent.vue?vue&type=template&id=6ab3315b&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LoginFormComponent_vue_vue_type_template_id_6ab3315b_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LoginFormComponent_vue_vue_type_template_id_6ab3315b_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

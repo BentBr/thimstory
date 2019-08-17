@@ -15,5 +15,9 @@ return [
 
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'login'     => [
+        'login-mail-sent'       => 'A login link has been sent!',
+        'register-mail-sent'    => 'A register link has been sent!',
+    ],
 
 ];
