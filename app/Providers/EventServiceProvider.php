@@ -2,8 +2,6 @@
 
 namespace thimstory\Providers;
 
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use thimstory\Listeners\SendUserDeleteMail;
 use thimstory\Listeners\SendUserLoginMail;
@@ -20,9 +18,6 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        //Registered::class => [
-            //SendEmailVerificationNotification::class,
-        //],
         UserRegister::class => [
             SendUserRegisterMail::class,
         ],
