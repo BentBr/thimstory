@@ -28,6 +28,19 @@
                                 max-width="500"
                                 max-height="300"
                         ></v-img>
+
+                        <h2>Update Detail</h2>
+                        <form method="POST" action="{{ route('patchStoryDetails') }}" enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" name="_method" value="PATCH">
+                            <input type="file" name="story_detail" id="story_detail" accept="image/*">
+                            <input type="hidden" name="story_detail_id" value="{{ $storyDetail->id }}">
+                            <br>
+                            <button type="submit" class="btn btn-primary">
+                                Update
+                            </button>
+                        </form>
+
                     </div>
                 </div>
             </div>

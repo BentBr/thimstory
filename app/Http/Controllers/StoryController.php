@@ -83,11 +83,11 @@ class StoryController extends Controller
         //validation: required + unique for every user(id) + no '/' in name
         $request->validate([
             'name'              =>  'required|unique:stories,name,Null,stories,user_id,' . $user->id . '|not_regex:/\//',
-            'storyToBeUpdated'  => 'required|uuid',
+            'story_to_be_updated'  => 'required|uuid',
         ]);
 
         //getting story
-        $story = Stories::findOrFail($request->storyToBeUpdated);
+        $story = Stories::findOrFail($request->story_to_be_updated);
 
         //if user is not owner
         if($story->user_id !== $user->id) {
@@ -113,14 +113,14 @@ class StoryController extends Controller
     {
         //validation: required + unique for every user(id) + no '/' in name
         $request->validate([
-            'storyToBeDeleted'  => 'required|uuid',
+            'story_to_be_deleted'  => 'required|uuid',
         ]);
 
         //getting user
         $user = User::findOrFail( Auth::user()->id);
 
         //getting story
-        $story = Stories::findOrFail($request->storyToBeDeleted);
+        $story = Stories::findOrFail($request->story_to_be_deleted);
 
         //if user is not owner
         if($story->user_id !== $user->id) {
@@ -165,7 +165,7 @@ class StoryController extends Controller
     {
         //validate im is image and max size
         $request->validate([
-            'storyDetail'   => 'required|image|mimes:jpeg,png,jpg,gif,svg', //todo: check for size
+            'story_detail'   => 'required|image|mimes:jpeg,png,jpg,gif,svg', //todo: check for size
             'story_id'      => 'required|uuid'
         ]);
 
@@ -182,9 +182,9 @@ class StoryController extends Controller
         }
 
         $storyDetail = new StoryDetails();
-        $storyDetail->create($story, $request->storyDetail->getClientMimeType());
+        $storyDetail->create($story, $request->story_detail->getClientMimeType());
 
-        $request->storyDetail->move(public_path('storyDetails'), $storyDetail->id); //todo: must be changed to external storage (S3?)
+        $request->story_detail->move(public_path('storyDetails'), $storyDetail->id); //todo: must be changed to external storage (S3?)
 
         return redirect(Route('storyDetail', [
                     'username' => $user->name,
@@ -193,9 +193,45 @@ class StoryController extends Controller
                 ]));
     }
 
-    public function patchStoryDetails()
+    /**
+     * PATCH story details via overwriting image in storage + updating mime type
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function patchStoryDetails(Request $request)
     {
+        //validate im is image and max size
+        $request->validate([
+            'story_detail'   => 'required|image|mimes:jpeg,png,jpg,gif,svg', //todo: check for size
+            'story_detail_id' => 'required|uuid',
+        ]);
 
+        //getting user
+        $user = User::findOrFail( Auth::user()->id);
+
+        //getting story detail
+        $storyDetail = StoryDetails::findOrFail($request->story_detail_id);
+
+        //getting story
+        $story = Stories::findOrFail($storyDetail->stories_id);
+
+        //if user is not owner
+        if($storyDetail->stories->user_id !== $user->id) {
+            return redirect(Route('home'), 403);
+        }
+
+        //update mime type
+        $storyDetail->updateStoryDetails($request->story_detail->getClientMimeType());
+
+        //update (overwrite) image
+        $request->story_detail->move(public_path('storyDetails'), $storyDetail->id); //todo: must be changed to external storage (S3?)
+
+        return redirect(Route('storyDetail', [
+            'username' => $user->name,
+            'story' => $story->name,
+            'storyCounter' => $storyDetail->story_counter,
+        ]));
     }
 
     public function deleteStoryDetails()

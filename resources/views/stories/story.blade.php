@@ -41,7 +41,7 @@
                         <form method="POST" action="{{ route('putStoryDetails') }}" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="_method" value="PUT">
-                            <input type="file" name="storyDetail" id="storyDetail" accept="image/*">
+                            <input type="file" name="story_detail" id="story_detail" accept="image/*">
                             <input type="hidden" name="story_id" value="{{ $story->id }}">
                             <br>
                             <button type="submit" class="btn btn-primary">
@@ -54,7 +54,7 @@
                             @csrf
                             <input type="hidden" name="_method" value="PATCH">
                             <input type="text" name="name" id="name" placeholder="Storyname">
-                            <input type="hidden" name="storyToBeUpdated" value="{{ $story->id }}">
+                            <input type="hidden" name="story_to_be_updated" value="{{ $story->id }}">
                             <br>
                             <button type="submit" class="btn btn-primary">
                                 Update!
@@ -65,7 +65,7 @@
                         <form method="POST" action="{{ route('deleteStory') }}">
                             @csrf
                             <input type="hidden" name="_method" value="DELETE">
-                            <input type="hidden" name="storyToBeDeleted" value="{{ $story->id }}">
+                            <input type="hidden" name="story_to_be_deleted" value="{{ $story->id }}">
                             <br>
                             <button type="submit" class="btn btn-primary">
                                 !!!Delete!!!

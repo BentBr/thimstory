@@ -22,15 +22,6 @@ class StoryDetails extends Model
         'story_id,'
     ];
 
-
-    /**
-     * @return Eloquent\Relations\BelongsTo
-     */
-    public function user()
-    {
-        return $this->belongsTo('\thimstory\Models\User');
-    }
-
     /**
      * @return Eloquent\Relations\BelongsTo
      */
@@ -73,9 +64,13 @@ class StoryDetails extends Model
         return $this->save();
     }
 
-    public function updateStoryDetails()
+    public function updateStoryDetails($mimeType)
     {
+        $this->touch();
 
+        return $this->update([
+                'mime_type' => $mimeType,
+            ]);
     }
 
     public function deleteStoryDetails()
