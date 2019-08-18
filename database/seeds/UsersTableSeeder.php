@@ -19,8 +19,6 @@ class UsersTableSeeder extends Seeder
             'name'      => 'Bent',
             'url_name'  => rawurlencode('Bent'),
             'email'     => 'mail@bent-brueggemann.de',
-            'password'  => bcrypt('password'),
-
         ]);
 
         //#1 testuser
@@ -29,12 +27,10 @@ class UsersTableSeeder extends Seeder
             'name'      => 'Bent Test1',
             'url_name'  => rawurlencode('Bent Test1'),
             'email'     => 'bent@bent-brueggemann.de',
-            'password'  => bcrypt('password'),
-
         ]);
 
         //creating 50 random user
-        factory(User::class, 50)
+        factory(User::class, 20)
             ->create();
     }
 }

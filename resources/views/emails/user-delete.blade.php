@@ -6,9 +6,10 @@
     <br>
 
     @component('mail::button', [
-    'url' => url('/login/' . $user->remember_token)
+    'url' => url('/user/delete/' . $user->remember_token)
     ])
-        Register!
+        Delete!
     @endcomponent
 
 @endsection
+

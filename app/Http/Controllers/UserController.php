@@ -4,8 +4,10 @@ namespace thimstory\Http\Controllers;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 use thimstory\Events\UserLogin;
 use thimstory\Events\UserRegister;
+use thimstory\Events\UserDelete;
 use thimstory\Models\User;
 use Illuminate\Http\Request;
 use Exception;
@@ -33,7 +35,13 @@ class UserController extends Controller
         return view('users.login');
     }
 
-    //shows profile view of requested user
+    /**
+     * send mail to provided address
+     * If user does not exist -> creates new user
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function putLogin(Request $request)
     {
         $request->validate([
@@ -45,26 +53,27 @@ class UserController extends Controller
             $user = User::getUserByEmail($request->email);
 
             //set new token for login
-            $user->remember_token   = Str::random(100);
-            $user->save();
+            $user->generateToken();
 
             //send login mail
             event(new UserLogin($user));
 
-            //setup hint
+            //setup hint for Frontend
             $data['hint'] = Lang::get('auth.login-mail-sent');
         } catch (Exception $exception) {
+
+            //revalidate for uniqueness
+            $request->validate([
+                'email' => 'unique:users,email|unique:users,name',
+            ]);
 
             //register + login mail
             if ($exception instanceof ModelNotFoundException) {
 
+                //creating new user based on email
                 $user           = new User;
-                $user->email    = $request->email;
-                $user->name     = $request->email;
-                $user->url_name = rawurlencode($request->email);
-                $user->password = Str::random(10);
-                $user->remember_token   = Str::random(100);
-                $user->save();
+                $user->createUserWithEmail($request->email);
+                $user->generateToken();
 
                 //send register mail
                 event(new UserRegister($user));
@@ -80,11 +89,10 @@ class UserController extends Controller
     /**
      * Login with token /login/{token}
      *
-     * @param Request $request
      * @param $token
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function userLoginWithToken(Request $request, $token)
+    public function userLoginWithToken($token)
     {
         //find user via token
         $user = User::getUserByToken($token);
@@ -111,9 +119,82 @@ class UserController extends Controller
      */
     public function logout()
     {
-        //logout user
-        $this->guard()->logout();
+        if(Auth::check())
+        {
+            //logout user
+            $this->guard()->logout();
+        }
 
         return redirect(Route('home'));
+    }
+
+    /**
+     * PATCH receives updated user data and stores it.
+     * Redirects to new users "home" aka profile
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function patchUser(Request $request)
+    {
+        $request->validate([
+            'name'      => 'required|alpha_dash',
+            'email'     => 'required|email',
+        ]);
+
+        if(Auth::check())
+        {
+            $user       = User::findOrFail(Auth::user()->id);
+            $user->name = $request->name;
+            $user->email= $request->email;
+            $user->updateUser();
+
+        } else {
+
+            //abort
+            redirect(Route('home'));
+        }
+
+        return redirect(Route('profile', ['username' => $user->url_name]));
+    }
+
+    /**
+     * DELETE marks user as deleted and redirects to home afterwards
+     * Verfies with token
+     *
+     * @param $token
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function deleteUser($token)
+    {
+        //find user via token
+        $user = User::getUserByToken($token);
+
+        //delete user
+        $user->deleteUser();
+
+        //delete token
+        $user->deleteToken();
+
+        return redirect(Route('home'));
+    }
+
+    /**
+     * DELETE marks user as deleted and redirects to home afterwards
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function sendDeleteVerificationMail()
+    {
+        if(Auth::check())
+        {
+            $user       = User::findOrFail(Auth::user()->id);
+            $user->generateToken();
+
+            //fire event for sending deletion mail
+            event(new UserDelete($user));
+        }
+
+        return redirect(Route('profile', ['username' => $user->url_name]));
     }
 }

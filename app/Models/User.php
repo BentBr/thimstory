@@ -4,8 +4,8 @@ namespace thimstory\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Str;
 use thimstory\Models\Concerns\UsesUuid;
 use Illuminate\Database\Eloquent;
 
@@ -61,18 +61,36 @@ class User extends Authenticatable
         return $this->HasMany('\thimstory\Models\Subscriptions');
     }
 
+    /**
+     * finds user by name in table users
+     *
+     * @param $userName
+     * @return mixed
+     */
     public static function getUserByUsername($userName)
     {
         return User::where('name', $userName)
                 ->firstOrFail();
     }
 
+    /**
+     * finds user by email in table users
+     *
+     * @param $userEmail
+     * @return mixed
+     */
     public static function getUserByEmail($userEmail)
     {
         return User::where('email', $userEmail)
                 ->firstOrFail();
     }
 
+    /**
+     * finds user by remember_token in table users
+     *
+     * @param $token
+     * @return mixed
+     */
     public static function getUserByToken($token)
     {
         return User::where('remember_token', $token)
@@ -80,13 +98,27 @@ class User extends Authenticatable
     }
 
     /**
+     * Generates new remember token for login / deletion
+     *
+     * @return bool
+     */
+    public function generateToken()
+    {
+        $this->remember_token = Str::random(100);
+
+        return $this->update([
+            'remember_token'    => $this->remember_token,
+        ]);
+    }
+
+    /**
      * Deletes token of current user. preferably after successfully login
      *
-     * @return void
+     * @return bool
      */
     public function deleteToken()
     {
-        $this->forceFill([
+        return $this->forceFill([
             'remember_token'    => null,
         ])->save();
     }
@@ -94,12 +126,54 @@ class User extends Authenticatable
     /**
      * verifies email address of current user by setting timestamp = now
      *
-     * @return void
+     * @return bool
      */
     public function verifyEmail()
     {
-        $this->forceFill([
+        return $this->forceFill([
             'email_verified_at' => now(),
         ])->save();
+    }
+
+    /**
+     * Creates user with provided email address
+     *
+     * @param $email
+     * @return bool
+     */
+    public function createUserWithEmail($email)
+    {
+        //create new user
+        $this->email = $email;
+        $this->name = $email;
+        $this->url_name = rawurlencode($email);
+
+        return $this->save();
+    }
+
+
+    /**
+     * Updates user in DB according to given user's object
+     *
+     * @return bool
+     */
+    public function updateUser()
+    {
+       return $this->update([
+           'name'       => $this->name,
+           'email'      => $this->email,
+           'url_name'   => rawurlencode($this->name),
+        ]);
+    }
+
+    /**
+     * Deletes user (softdelete)
+     *
+     * @return bool|null
+     * @throws \Exception
+     */
+    public function deleteUser()
+    {
+        return $this->delete();
     }
 }

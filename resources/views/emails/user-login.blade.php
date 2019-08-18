@@ -8,7 +8,7 @@
     @component('mail::button', [
     'url' => url('/login/' . $user->remember_token)
     ])
-        Register!
+        Login!
     @endcomponent
 
 @endsection

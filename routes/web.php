@@ -28,8 +28,9 @@ Route::middleware('auth')->group(function () {
 
     //users auth
     Route::get('/logout', 'UserController@logout')->name('logout'); //done
-    Route::patch('/user', 'UserController@patchUser');
-    Route::delete('/user', 'UserController@deleteUser');
+    Route::patch('/user', 'UserController@patchUser')->name('patchUser'); //done
+    Route::delete('/user', 'UserController@sendDeleteVerificationMail')->name('sendDeleteVerificationMail'); //done
+    Route::get('/user/delete/{token}', 'UserController@deleteUser')->name('deleteUser'); //done
 });
 
 //users
