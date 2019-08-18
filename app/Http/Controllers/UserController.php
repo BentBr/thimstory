@@ -124,11 +124,8 @@ class UserController extends Controller
      */
     public function logout()
     {
-        if(Auth::check())
-        {
-            //logout user
-            $this->guard()->logout();
-        }
+        //logout user
+        $this->guard()->logout();
 
         return redirect(Route('home'));
     }
@@ -147,18 +144,10 @@ class UserController extends Controller
             'email'     => 'required|email',
         ]);
 
-        if(Auth::check())
-        {
-            $user       = User::findOrFail(Auth::user()->id);
-            $user->name = $request->name;
-            $user->email= $request->email;
-            $user->updateUser();
-
-        } else {
-
-            //abort
-            redirect(Route('home'));
-        }
+        $user       = User::findOrFail(Auth::user()->id);
+        $user->name = $request->name;
+        $user->email= $request->email;
+        $user->updateUser();
 
         return redirect(Route('profile', ['username' => $user->url_name]));
     }
@@ -191,14 +180,11 @@ class UserController extends Controller
      */
     public function sendDeleteVerificationMail()
     {
-        if(Auth::check())
-        {
-            $user       = User::findOrFail(Auth::user()->id);
-            $user->generateToken();
+        $user       = User::findOrFail(Auth::user()->id);
+        $user->generateToken();
 
-            //fire event for sending deletion mail
-            event(new UserDelete($user));
-        }
+        //fire event for sending deletion mail
+        event(new UserDelete($user));
 
         return redirect(Route('profile', ['username' => $user->url_name]));
     }
