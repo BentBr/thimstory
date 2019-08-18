@@ -12,7 +12,6 @@ use thimstory\Models\User;
 use Illuminate\Http\Request;
 use Exception;
 use Lang;
-use Str;
 
 class UserController extends Controller
 {
@@ -139,9 +138,12 @@ class UserController extends Controller
      */
     public function patchUser(Request $request)
     {
+        //validate if email is a valid email.
+        //checkes if username und email are unique spanning email and name columns
+        //checks if username has no '/'
         $request->validate([
-            'name'      => 'required|alpha_dash',
-            'email'     => 'required|email',
+            'name'      => 'required|unique:users,email|unique:users,name|not_regex:/\//',
+            'email'     => 'required|email|unique:users,email|unique:users,name',
         ]);
 
         $user       = User::findOrFail(Auth::user()->id);
