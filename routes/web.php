@@ -11,12 +11,6 @@
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
-//Auth::routes();
-//Route::get('/home', 'HomeController@index')->name('home');
-
 //marketing & generic
 Route::get('/', 'ContentController@home')->name('home'); //done
 Route::get('/imprint', 'ContentController@imprint')->name('imprint'); //done

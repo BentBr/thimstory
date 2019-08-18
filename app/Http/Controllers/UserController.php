@@ -18,7 +18,12 @@ class UserController extends Controller
 {
     use AuthenticatesUsers;
 
-    //shows profile view of requested user
+    /**
+     * Shows profile view of user which is being fetched depending on {username} in url
+     *
+     * @param $username
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function profile($username)
     {
         //getting requested data
