@@ -55,4 +55,21 @@ class Stories extends Model
             ->where('name', $story)
             ->firstOrFail();
     }
+
+    /**
+     * Creates a new story based on given name and User
+     *
+     * @param $name
+     * @param User $user
+     * @return bool
+     */
+    public function create($name, User $user)
+    {
+        //create new user
+        $this->name     = $name;
+        $this->user_id  = $user->id;
+        $this->url_name = rawurlencode($name);
+
+        return $this->save();
+    }
 }

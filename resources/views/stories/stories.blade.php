@@ -23,8 +23,21 @@
                                 <br>
                                 <br>
                             @endforeach
+                        @else
+                            <span>no stories here!</span>
                         @endif
 
+                        <br><br>
+                        <h2>Create a new Story</h2>
+                        <form method="POST" action="{{ route('putStory') }}">
+                            @csrf
+                            <input type="hidden" name="_method" value="PUT">
+                            <input type="text" name="name" id="name" placeholder="Storyname">
+                            <br>
+                            <button type="submit" class="btn btn-primary">
+                                Create!
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

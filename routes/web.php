@@ -42,9 +42,9 @@ Route::get('/{username}/{story}/{storyCounter}', 'StoryController@storyDetail')-
 Route::middleware('auth')->group(function () {
 
     //stories auth
-    Route::put('/story', 'StoryController@putStory');
-    Route::patch('/story', 'StoryController@patchStory');
-    Route::delete('/story', 'StoryController@deleteStory');
+    Route::put('/story', 'StoryController@putStory')->name('putStory'); //done
+    Route::patch('/story', 'StoryController@patchStory')->name('patchStory');
+    Route::delete('/story', 'StoryController@deleteStory')->name('deleteStory');
 
     //subscriptions auth
     Route::put('/subscription/{storyId}', 'SubscriptionController@putSubscription');
