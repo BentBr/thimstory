@@ -54,7 +54,7 @@ class StoryDetails extends Model
     public function create(Stories $story, $mimeType)
     {
         //counting so later on correct storyDetail can be retrieved again
-        $count = StoryDetails::where('stories_id', $story->id)->count();
+        $count = StoryDetails::where('stories_id', $story->id)->withTrashed()->count();
 
         //create new storyDetails
         $this->stories_id = $story->id;
