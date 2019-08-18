@@ -41,6 +41,18 @@
                             </button>
                         </form>
 
+                        <br><br>
+                        <h2>!!Delete Story Detail!!</h2>
+                        <form method="POST" action="{{ route('deleteStoryDetails') }}">
+                            @csrf
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="story_detail_to_be_deleted" value="{{ $storyDetail->id }}">
+                            <br>
+                            <button type="submit" class="btn btn-primary">
+                                !!!Delete!!!
+                            </button>
+                        </form>
+
                     </div>
                 </div>
             </div>

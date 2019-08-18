@@ -2,12 +2,12 @@
 
 namespace thimstory\Http\Controllers;
 
-use Ramsey\Uuid\Uuid;
 use thimstory\Models\StoryDetails;
 use thimstory\Models\User;
 use thimstory\Models\Stories;
 use Auth;
 use Illuminate\Http\Request;
+use File;
 
 class StoryController extends Controller
 {
@@ -55,7 +55,7 @@ class StoryController extends Controller
     public function putStory(Request $request)
     {
         //getting user
-        $user = User::findOrFail( Auth::user()->id);
+        $user = User::findOrFail(Auth::user()->id);
 
         //validation: required + unique for every user(id) + no '/' in name
         $request->validate([
@@ -78,7 +78,7 @@ class StoryController extends Controller
     public function patchStory(Request $request)
     {
         //getting user
-        $user = User::findOrFail( Auth::user()->id);
+        $user = User::findOrFail(Auth::user()->id);
 
         //validation: required + unique for every user(id) + no '/' in name
         $request->validate([
@@ -117,7 +117,7 @@ class StoryController extends Controller
         ]);
 
         //getting user
-        $user = User::findOrFail( Auth::user()->id);
+        $user = User::findOrFail(Auth::user()->id);
 
         //getting story
         $story = Stories::findOrFail($request->story_to_be_deleted);
@@ -170,7 +170,7 @@ class StoryController extends Controller
         ]);
 
         //getting user
-        $user = User::findOrFail( Auth::user()->id);
+        $user = User::findOrFail(Auth::user()->id);
 
         //getting story
         $story = Stories::findOrFail($request->story_id);
@@ -208,7 +208,7 @@ class StoryController extends Controller
         ]);
 
         //getting user
-        $user = User::findOrFail( Auth::user()->id);
+        $user = User::findOrFail(Auth::user()->id);
 
         //getting story detail
         $storyDetail = StoryDetails::findOrFail($request->story_detail_id);
@@ -234,8 +234,38 @@ class StoryController extends Controller
         ]));
     }
 
-    public function deleteStoryDetails()
+    /**
+     * DELETE story details with removing of images and soft delete of db entry
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function deleteStoryDetails(Request $request)
     {
+        //validate im is image and max size
+        $request->validate([
+            'story_detail_to_be_deleted' => 'required|uuid',
+        ]);
 
+        //getting user
+        $user = User::findOrFail(Auth::user()->id);
+
+        //getting story detail
+        $storyDetail = StoryDetails::findOrFail($request->story_detail_to_be_deleted);
+
+        //if user is not owner
+        if($storyDetail->stories->user_id !== $user->id) {
+
+            return redirect(Route('home'), 403);
+        }
+
+        //getting story
+        $story = Stories::findOrFail($storyDetail->stories_id);
+
+        File::delete('storyDetails/' . $storyDetail->id);
+        $storyDetail->deleteStoryDetails();
+
+        //redirecting back to story
+        return redirect(Route('story', ['username' => $user->url_name, 'story' => $story->url_name]));
     }
 }

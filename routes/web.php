@@ -48,8 +48,8 @@ Route::middleware('auth')->group(function () {
 
     //story details auth
     Route::put('/story-details', 'StoryController@putStoryDetails')->name('putStoryDetails'); //done
-    Route::patch('/story-details', 'StoryController@patchStoryDetails')->name('patchStoryDetails');
-    Route::delete('/story-details', 'StoryController@deleteStoryDetails')->name('deleteStoryDetails');
+    Route::patch('/story-details', 'StoryController@patchStoryDetails')->name('patchStoryDetails'); //done
+    Route::delete('/story-details', 'StoryController@deleteStoryDetails')->name('deleteStoryDetails'); //done
 
     //subscriptions auth
     Route::put('/subscription/{storyId}', 'SubscriptionController@putSubscription');

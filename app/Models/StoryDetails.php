@@ -4,13 +4,13 @@ namespace thimstory\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent;
-use Ramsey\Uuid\Uuid;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use thimstory\Models\Concerns\UsesUuid;
-use thimstory\Models\Stories;
 
 class StoryDetails extends Model
 {
     use UsesUuid;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -64,6 +64,13 @@ class StoryDetails extends Model
         return $this->save();
     }
 
+    /**
+     * updates given story details mime type due to non-changing uuid.
+     * updated_at is being changed anyways (even if mime type is same)
+     *
+     * @param $mimeType
+     * @return bool
+     */
     public function updateStoryDetails($mimeType)
     {
         $this->touch();
@@ -73,8 +80,15 @@ class StoryDetails extends Model
             ]);
     }
 
+    /**
+     * (soft) deleted story details
+     *
+     * @return bool|null
+     * @throws \Exception
+     */
     public function deleteStoryDetails()
     {
-
+        //deletes this detail
+        return $this->delete();
     }
 }
