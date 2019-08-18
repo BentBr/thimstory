@@ -47,9 +47,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/story', 'StoryController@deleteStory')->name('deleteStory'); //done
 
     //story details auth
-    Route::put('/story-details', 'StoryDetailsController@putStoryDetails')->name('putStoryDetails');
-    Route::patch('/story-details', 'StoryDetailsController@patchStoryDetails')->name('patchStoryDetails');
-    Route::delete('/story-details', 'StoryDetailsController@deleteStoryDetails')->name('deleteStoryDetails');
+    Route::put('/story-details', 'StoryController@putStoryDetails')->name('putStoryDetails'); //done
+    Route::patch('/story-details', 'StoryController@patchStoryDetails')->name('patchStoryDetails');
+    Route::delete('/story-details', 'StoryController@deleteStoryDetails')->name('deleteStoryDetails');
 
     //subscriptions auth
     Route::put('/subscription/{storyId}', 'SubscriptionController@putSubscription');

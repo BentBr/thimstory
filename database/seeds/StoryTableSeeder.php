@@ -20,7 +20,6 @@ class StoryTableSeeder extends Seeder
             'url_name'  => rawurlencode('Bent Story number #1'),
             'views'     => '13',
             'follower'  => '0',
-
         ]);
 
         DB::table('story_details')->insert([
@@ -28,7 +27,7 @@ class StoryTableSeeder extends Seeder
             'story_counter'=> 0,
             'stories_id'    => '12c6290b-94bb-400e-900e-1a4b34e8b8a5',
             'views'     => '133778',
-
+            'mime_type' => 'jpg,'
         ]);
 
         DB::table('subscriptions')->insert([

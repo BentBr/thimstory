@@ -19,7 +19,15 @@
                             @if(count($storyDetails))
                                 <h3>These are the story details</h3>
                                 @foreach($storyDetails as $storyDetail)
-                                <a href="/{{ $user->url_name }}/{{ $story->url_name }}/{{ $storyDetail->story_counter }}">{{ $storyDetail->story_counter }}</a>
+                                <a href="/{{ $user->url_name }}/{{ $story->url_name }}/{{ $storyDetail->story_counter }}">
+                                    <v-img
+                                            src="/storyDetails/{{ $storyDetail->id }}"
+                                            aspect-ratio="1"
+                                            class="grey lighten-2"
+                                            max-width="100"
+                                            max-height="100"
+                                    ></v-img>
+                                </a>
                                 @endforeach
                             @else
                                 <span>No details here!</span>
@@ -27,7 +35,18 @@
                             <br>
                             <br>
                         @endif
-
+                        <br><br>
+                        <h2>Add Detail</h2>
+                        <form method="POST" action="{{ route('putStoryDetails') }}" enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" name="_method" value="PUT">
+                            <input type="file" name="storyDetail" id="storyDetail" accept="image/*">
+                            <input type="hidden" name="story_id" value="{{ $story->id }}">
+                            <br>
+                            <button type="submit" class="btn btn-primary">
+                                Add
+                            </button>
+                        </form>
                         <br><br>
                         <h2>Change Story</h2>
                         <form method="POST" action="{{ route('patchStory') }}">

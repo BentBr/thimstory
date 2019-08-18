@@ -35,6 +35,7 @@ class CreateStoriesTable extends Migration
             $table->integer('story_counter');
             $table->uuid('stories_id');
             $table->integer('views')->default(0);
+            $table->string('mime_type');
             $table->timestamps();
             $table->softDeletes();
 

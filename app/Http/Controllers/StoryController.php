@@ -2,6 +2,8 @@
 
 namespace thimstory\Http\Controllers;
 
+use Ramsey\Uuid\Uuid;
+use thimstory\Models\StoryDetails;
 use thimstory\Models\User;
 use thimstory\Models\Stories;
 use Auth;
@@ -39,24 +41,6 @@ class StoryController extends Controller
         $data['storyDetails'] = $data['story']->storyDetails;
 
         return view('stories.story', $data);
-    }
-
-    /**
-     * Renders story detail view {username}/{story}/{count}
-     *
-     * @param $username
-     * @param $story
-     * @param $storyCounter
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function storyDetail($username, $story, $storyCounter)
-    {
-        //getting requested data
-        $data['user'] = User::getUserByUsername($username);
-        $data['story'] = Stories::getStoryByUrlName($data['user']->id, $story);
-        $data['storyDetail'] = $data['story']->storyDetails;
-
-        return view('stories.story-details', $data);
     }
 
     /**
@@ -125,12 +109,13 @@ class StoryController extends Controller
      */
     public function deleteStory(Request $request)
     {
-        //getting user
-        $user = User::findOrFail( Auth::user()->id);
         //validation: required + unique for every user(id) + no '/' in name
         $request->validate([
             'storyToBeDeleted'  => 'required|uuid',
         ]);
+
+        //getting user
+        $user = User::findOrFail( Auth::user()->id);
 
         //getting story
         $story = Stories::findOrFail($request->storyToBeDeleted);
@@ -146,5 +131,65 @@ class StoryController extends Controller
 
         //redirecting back to stories
         return redirect(Route('stories', ['username' => $user->url_name]));
+    }
+
+    /**
+     * Renders story detail view {username}/{story}/{count}
+     *
+     * @param $username
+     * @param $story
+     * @param $storyCounter
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function storyDetail($username, $story, $storyCounter)
+    {
+        //getting requested data
+        $data['user'] = User::getUserByUsername($username);
+        $data['story'] = Stories::getStoryByUrlName($data['user']->id, $story);
+        $data['storyDetail'] = $data['story']->storyDetails[$storyCounter];
+
+        return view('stories.story-details', $data);
+    }
+
+    public function putStoryDetails(Request $request)
+    {
+        //validate im is image and max size
+        $request->validate([
+            'storyDetail'   => 'required|image|mimes:jpeg,png,jpg,gif,svg', //todo: check for size
+            'story_id'      => 'required|uuid'
+        ]);
+
+        //getting user
+        $user = User::findOrFail( Auth::user()->id);
+
+        //getting story
+        $story = Stories::findOrFail($request->story_id);
+
+        //if user is not owner
+        if($story->user_id !== $user->id) {
+
+            return redirect(Route('home'), 403);
+        }
+
+        $storyDetail = new StoryDetails();
+        $storyDetail->create($story, $request->storyDetail->getClientMimeType());
+
+        $request->storyDetail->move(public_path('storyDetails'), $storyDetail->id);
+
+        return redirect(Route('storyDetail', [
+                    'username' => $user->name,
+                    'story' => $story->name,
+                    'storyCounter' => $storyDetail->story_counter,
+                ]));
+    }
+
+    public function patchStoryDetails()
+    {
+
+    }
+
+    public function deleteStoryDetails()
+    {
+
     }
 }

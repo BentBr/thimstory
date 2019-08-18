@@ -12,7 +12,7 @@
                             This is {{ Route::currentRouteName() }} path
                         </div>
 
-                        <h2>Stories</h2>
+                        <h2>Story detail</h2>
                         @if(isset($story))
                             {{ $story->name }}
                             <br>
@@ -21,8 +21,13 @@
                             <br>
                         @endif
 
-Here will be the big image
-
+                        <v-img
+                                src="/storyDetails/{{ $storyDetail->id }}"
+                                aspect-ratio="1"
+                                class="grey lighten-2"
+                                max-width="500"
+                                max-height="300"
+                        ></v-img>
                     </div>
                 </div>
             </div>
