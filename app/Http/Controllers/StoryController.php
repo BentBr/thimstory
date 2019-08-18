@@ -42,6 +42,9 @@ class StoryController extends Controller
         //sorting must be forced due to uuid which has no intrinsic sorting in collection
         $data['storyDetails'] = $data['story']->storyDetails->sortBy('story_counter');
 
+        //adding view counter
+        $data['story']->addViewCounterPlusOne();
+
         return view('stories.story', $data);
     }
 

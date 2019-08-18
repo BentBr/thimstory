@@ -100,4 +100,19 @@ class Stories extends Model
         //delete story
         return $this->delete();
     }
+
+    /**
+     * Adding +1 to view counter of respected story
+     *
+     * @return bool
+     */
+    public function addViewCounterPlusOne()
+    {
+        $this->views++;
+        $this->timestamps = false;
+
+        return $this->update([
+                'view'  => $this->views,
+            ]);
+    }
 }
