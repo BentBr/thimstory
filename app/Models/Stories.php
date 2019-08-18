@@ -65,11 +65,39 @@ class Stories extends Model
      */
     public function create($name, User $user)
     {
-        //create new user
+        //create new story
         $this->name     = $name;
         $this->user_id  = $user->id;
         $this->url_name = rawurlencode($name);
 
         return $this->save();
+    }
+
+    /**
+     * Updates story according to new data
+     *
+     * @param $name
+     * @param User $user
+     * @return bool
+     */
+    public function updateStory($name)
+    {
+        //update story
+        return $this->update([
+            'name'      => $name,
+            'url_name'  => rawurlencode($name),
+        ]);
+    }
+
+    /**
+     * Deletes story according to new data
+     *
+     * @return bool|null
+     * @throws \Exception
+     */
+    public function deleteStory()
+    {
+        //delete story
+        return $this->delete();
     }
 }

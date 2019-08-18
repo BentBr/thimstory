@@ -43,8 +43,13 @@ Route::middleware('auth')->group(function () {
 
     //stories auth
     Route::put('/story', 'StoryController@putStory')->name('putStory'); //done
-    Route::patch('/story', 'StoryController@patchStory')->name('patchStory');
-    Route::delete('/story', 'StoryController@deleteStory')->name('deleteStory');
+    Route::patch('/story', 'StoryController@patchStory')->name('patchStory'); //done
+    Route::delete('/story', 'StoryController@deleteStory')->name('deleteStory'); //done
+
+    //story details auth
+    Route::put('/story-details', 'StoryDetailsController@putStoryDetails')->name('putStoryDetails');
+    Route::patch('/story-details', 'StoryDetailsController@patchStoryDetails')->name('patchStoryDetails');
+    Route::delete('/story-details', 'StoryDetailsController@deleteStoryDetails')->name('deleteStoryDetails');
 
     //subscriptions auth
     Route::put('/subscription/{storyId}', 'SubscriptionController@putSubscription');

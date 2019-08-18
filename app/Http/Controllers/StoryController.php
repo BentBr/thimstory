@@ -70,6 +70,7 @@ class StoryController extends Controller
     {
         //getting user
         $user = User::findOrFail( Auth::user()->id);
+
         //validation: required + unique for every user(id) + no '/' in name
         $request->validate([
             'name'  =>  'required|unique:stories,name,Null,stories,user_id,' . $user->id . '|not_regex:/\//',
@@ -81,13 +82,69 @@ class StoryController extends Controller
         return redirect(Route('story', ['username' => $user->url_name, 'story' => $story->url_name]));
     }
 
-    public function patchStory()
+    /**
+     * PATCH existing story for owner
+     * redirects to story details afterwards
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function patchStory(Request $request)
     {
+        //getting user
+        $user = User::findOrFail( Auth::user()->id);
 
+        //validation: required + unique for every user(id) + no '/' in name
+        $request->validate([
+            'name'              =>  'required|unique:stories,name,Null,stories,user_id,' . $user->id . '|not_regex:/\//',
+            'storyToBeUpdated'  => 'required|uuid',
+        ]);
+
+        //getting story
+        $story = Stories::findOrFail($request->storyToBeUpdated);
+
+        //if user is not owner
+        if($story->user_id !== $user->id) {
+
+            return redirect(Route('home'), 403);
+        }
+
+        //updating story
+        $story->updateStory($request->name, $user);
+
+        //redirecting back to story
+        return redirect(Route('story', ['username' => $user->url_name, 'story' => $story->url_name]));
     }
 
-    public function deleteStory()
+    /**
+     * DELETE existing story for owner
+     * redirects to stories afterwards
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function deleteStory(Request $request)
     {
+        //getting user
+        $user = User::findOrFail( Auth::user()->id);
+        //validation: required + unique for every user(id) + no '/' in name
+        $request->validate([
+            'storyToBeDeleted'  => 'required|uuid',
+        ]);
 
+        //getting story
+        $story = Stories::findOrFail($request->storyToBeDeleted);
+
+        //if user is not owner
+        if($story->user_id !== $user->id) {
+
+            return redirect(Route('home'), 403);
+        }
+
+        //updating story
+        $story->deleteStory();
+
+        //redirecting back to stories
+        return redirect(Route('stories', ['username' => $user->url_name]));
     }
 }
