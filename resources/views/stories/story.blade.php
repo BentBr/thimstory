@@ -28,6 +28,7 @@
                                             max-height="100"
                                     ></v-img>
                                 </a>
+                                    <br>
                                 @endforeach
                             @else
                                 <span>No details here!</span>

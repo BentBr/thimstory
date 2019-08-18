@@ -39,13 +39,27 @@ class StoryDetails extends Model
         return $this->belongsTo('\thimstory\Models\Stories');
     }
 
-    public static function getStoryDetailsByStoryIdAndCounter($story, $storyCounter)
+    /**
+     * Retrieves Story Details (singular) for given story id and story counter
+     *
+     * @param $storyId
+     * @param $storyCounter
+     * @return mixed
+     */
+    public static function getStoryDetailsByStoryIdAndCounter($storyId, $storyCounter)
     {
-        return StoryDetails::where('stories_id', $story)
+        return StoryDetails::where('stories_id', $storyId)
             ->where('story_counter', $storyCounter)
             ->firstOrFail();
     }
 
+    /**
+     * Creates new story details with attachment to story. Adds mime type
+     *
+     * @param \thimstory\Models\Stories $story
+     * @param $mimeType
+     * @return bool
+     */
     public function create(Stories $story, $mimeType)
     {
         //counting so later on correct storyDetail can be retrieved again
@@ -59,7 +73,12 @@ class StoryDetails extends Model
         return $this->save();
     }
 
-    public function storeStoryDetail()
+    public function updateStoryDetails()
+    {
+
+    }
+
+    public function deleteStoryDetails()
     {
 
     }

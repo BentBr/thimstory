@@ -21,7 +21,8 @@ class StoryController extends Controller
     {
         //getting requested data
         $data['user'] = User::getUserByUsername($username);
-        $data['stories'] = $data['user']->stories;
+        //sorting must be forced due to uuid which has no intrinsic sorting in collection
+        $data['stories'] = $data['user']->stories->sortBy('created_at');
 
         return view('stories.stories', $data);
     }
@@ -38,7 +39,8 @@ class StoryController extends Controller
         //getting requested data
         $data['user'] = User::getUserByUsername($username);
         $data['story'] = Stories::getStoryByUrlName($data['user']->id, $story);
-        $data['storyDetails'] = $data['story']->storyDetails;
+        //sorting must be forced due to uuid which has no intrinsic sorting in collection
+        $data['storyDetails'] = $data['story']->storyDetails->sortBy('story_counter');
 
         return view('stories.story', $data);
     }
@@ -146,11 +148,19 @@ class StoryController extends Controller
         //getting requested data
         $data['user'] = User::getUserByUsername($username);
         $data['story'] = Stories::getStoryByUrlName($data['user']->id, $story);
-        $data['storyDetail'] = $data['story']->storyDetails[$storyCounter];
+        //sorting must be forced due to uuid which has no intrinsic sorting in collection
+        $data['storyDetail'] = StoryDetails::getStoryDetailsByStoryIdAndCounter($data['story']->id,$storyCounter);
 
         return view('stories.story-details', $data);
     }
 
+    /**
+     * PUT new story detail and attaches it to given story
+     * redirects to detail afterwards
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function putStoryDetails(Request $request)
     {
         //validate im is image and max size
@@ -174,7 +184,7 @@ class StoryController extends Controller
         $storyDetail = new StoryDetails();
         $storyDetail->create($story, $request->storyDetail->getClientMimeType());
 
-        $request->storyDetail->move(public_path('storyDetails'), $storyDetail->id);
+        $request->storyDetail->move(public_path('storyDetails'), $storyDetail->id); //todo: must be changed to external storage (S3?)
 
         return redirect(Route('storyDetail', [
                     'username' => $user->name,

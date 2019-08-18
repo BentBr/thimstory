@@ -27,7 +27,7 @@ class StoryTableSeeder extends Seeder
             'story_counter'=> 0,
             'stories_id'    => '12c6290b-94bb-400e-900e-1a4b34e8b8a5',
             'views'     => '133778',
-            'mime_type' => 'jpg,'
+            'mime_type' => 'image/jpeg'
         ]);
 
         DB::table('subscriptions')->insert([
