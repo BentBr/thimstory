@@ -2,11 +2,15 @@
 
 namespace thimstory\Http\Controllers;
 
+use thimstory\Models\User;
+
 class ContentController extends Controller
 {
     public function home()
     {
-        return view('content/home');
+        $data['users'] = User::getUsersBasedOnViews(10);
+
+        return view('content/home', $data);
     }
 
     public function imprint()

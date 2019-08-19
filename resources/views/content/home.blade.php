@@ -12,8 +12,18 @@
                             This is {{ Route::currentRouteName() }} path
                         </div>
 
-                        <h2>home</h2>
-
+                        <h1>home</h1>
+                        <h2>featured users</h2>
+                        @if(count($users))
+                            @foreach($users as $user)
+                                <a href="/{{ $user->url_name }}">{{ $user->name }}</a>
+                                <br>
+                                Views: {{ $user->views }}
+                                <br>
+                                Stories: {{ count($user->stories) }}
+                                <br><br>
+                            @endforeach
+                        @endif
 
                     </div>
                 </div>

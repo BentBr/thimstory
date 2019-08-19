@@ -19,8 +19,8 @@ class CreateStoriesTable extends Migration
             $table->uuid('user_id');
             $table->string('name');
             $table->string('url_name');
-            $table->integer('views')->default(0);
-            $table->integer('follower')->default(0);
+            $table->bigInteger('views')->default(0);
+            $table->bigInteger('follower')->default(0);
             $table->timestamps();
             $table->softDeletes();
 
@@ -34,7 +34,7 @@ class CreateStoriesTable extends Migration
             $table->uuid('id')->unique();
             $table->integer('story_counter');
             $table->uuid('stories_id');
-            $table->integer('views')->default(0);
+            $table->bigInteger('views')->default(0);
             $table->string('mime_type');
             $table->timestamps();
             $table->softDeletes();

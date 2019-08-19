@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Str;
 use thimstory\Models\Concerns\UsesUuid;
 use Illuminate\Database\Eloquent;
+use thimstory\Models\Stories;
 
 class User extends Authenticatable
 {
@@ -176,4 +177,19 @@ class User extends Authenticatable
     {
         return $this->delete();
     }
+
+    /**
+     * Returns users with most views decr paginated by $pagination
+     *
+     * @param int $pagination
+     * @return mixed
+     */
+    public static function getUsersBasedOnViews(int $pagination)
+    {
+        $users = User::orderBy('views', 'desc')
+                ->paginate($pagination);
+
+        return $users;
+    }
+
 }
