@@ -19,12 +19,13 @@ class SubscriptionController extends Controller
         //get user
         $user = User::findOrFail(Auth::user()->id);
         $story = Stories::findOrFail($request->story_id);
+        $storyUser = $story->user;
 
         //user can't subscribe own stories
         if ($user->id === $story->user_id) {
 
             return redirect(Route('story', [
-                    'username' => $user->url_name, 'story' => $story->url_name  //todo: wrong uri
+                    'username' => $storyUser->url_name, 'story' => $story->url_name
                 ]));
         }
 
@@ -37,7 +38,7 @@ class SubscriptionController extends Controller
             $subscription->unsubscribe();
 
             return redirect(Route('story', [
-                    'username' => $user->url_name, 'story' => $story->url_name  //todo: wrong uri
+                    'username' => $storyUser->url_name, 'story' => $story->url_name
                 ]));
         } else {
 
@@ -46,7 +47,7 @@ class SubscriptionController extends Controller
             $subscription->subscribe($story->id, $user->id);
 
             return redirect(Route('story', [
-                    'username' => $user->url_name, 'story' => $story->url_name  //todo: wrong uri
+                    'username' => $storyUser->url_name, 'story' => $story->url_name
                 ]));
         }
     }
