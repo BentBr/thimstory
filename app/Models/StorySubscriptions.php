@@ -6,7 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use thimstory\Models\Concerns\UsesUuid;
 use Illuminate\Database\Eloquent;
 
-class Subscriptions extends Model
+/**
+ * Stories can be subscribed
+ * Class Subscriptions
+ * @package thimstory\Models
+ */
+class StorySubscriptions extends Model
 {
     use UsesUuid;
 
@@ -31,6 +36,8 @@ class Subscriptions extends Model
     ];
 
     /**
+     * Describes user which subscribed to this story
+     *
      * @return Eloquent\Relations\BelongsTo
      */
     public function user()
@@ -39,6 +46,8 @@ class Subscriptions extends Model
     }
 
     /**
+     * Describes story to which use has subscribed
+     *
      * @return Eloquent\Relations\BelongsTo
      */
     public function stories()

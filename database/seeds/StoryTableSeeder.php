@@ -30,7 +30,7 @@ class StoryTableSeeder extends Seeder
             'mime_type' => 'image/jpeg'
         ]);
 
-        DB::table('subscriptions')->insert([
+        DB::table('story_subscriptions')->insert([
             'id'          => Uuid::uuid4(),
             'stories_id'    => '12c6290b-94bb-400e-900e-1a4b34e8b8a5',
             'user_id'     => '04c6290b-94bb-400e-900e-1a4b34e8b8a5',
