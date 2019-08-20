@@ -36,6 +36,24 @@
                             <br>
                             <br>
                         @endif
+                        @auth()
+                            <h2>Subscribe!!</h2>
+
+                            <form method="POST" action="{{ route('putStorySubscription') }}">
+                                @csrf
+                                <input type="hidden" name="_method" value="PUT">
+                                <input type="hidden" name="story_id" value="{{ $story->id }}">
+                                <br>
+                                @if(is_null($userSubscribed))
+                                    <button type="submit" class="btn btn-primary"><span style="color:mediumblue">Subscribe</span></button>
+
+                                @else
+                                    <button type="submit" class="btn btn-primary"><span style="color:darkred">Unsubscribe</span></button>
+
+                                @endif
+
+                            </form>
+                        @endauth
                         <br><br>
                         <h2>Add Detail</h2>
                         <form method="POST" action="{{ route('putStoryDetails') }}" enctype="multipart/form-data">

@@ -3,6 +3,7 @@
 namespace thimstory\Http\Controllers;
 
 use thimstory\Models\StoryDetails;
+use thimstory\Models\StorySubscriptions;
 use thimstory\Models\User;
 use thimstory\Models\Stories;
 use Auth;
@@ -41,6 +42,10 @@ class StoryController extends Controller
         $data['story'] = Stories::getStoryByUrlName($data['user']->id, $story);
         //sorting must be forced due to uuid which has no intrinsic sorting in collection
         $data['storyDetails'] = $data['story']->storyDetails->sortBy('story_counter');
+
+        //getting if user is subscriber of certain story
+        $data['userSubscribed'] = StorySubscriptions
+                ::isSubscriptionSet($data['story']->id, Auth::user()->id);
 
         //adding view counter
         $data['story']->addViewCounterPlusOne();

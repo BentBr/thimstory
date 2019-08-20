@@ -54,4 +54,33 @@ class StorySubscriptions extends Model
     {
         return $this->belongsTo('\thimstory\Models\Stories');
     }
+
+    /**
+     * Returns existing subscription if exists
+     *
+     * @param $storyId
+     * @param $userId
+     * @return mixed
+     */
+    public static function isSubscriptionSet($storyId, $userId)
+    {
+        $isSubscriptionSet = StorySubscriptions::where('stories_id', $storyId)
+            ->where('user_id', $userId)
+            ->first();
+
+        return $isSubscriptionSet;
+    }
+
+    public function subscribe($storyId, $userId)
+    {
+        $this->stories_id = $storyId;
+        $this->user_id = $userId;
+
+        return $this->save();
+    }
+
+    public function unsubscribe()
+    {
+        return $this->delete();
+    }
 }
