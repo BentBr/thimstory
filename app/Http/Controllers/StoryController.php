@@ -44,8 +44,14 @@ class StoryController extends Controller
         $data['storyDetails'] = $data['story']->storyDetails->sortBy('story_counter');
 
         //getting if user is subscriber of certain story
-        $data['userSubscribed'] = StorySubscriptions
+        if(Auth::check()) {
+
+            $data['userSubscribed'] = StorySubscriptions
                 ::isSubscriptionSet($data['story']->id, Auth::user()->id);
+        } else {
+
+            $data['userSubscribed'] = null;
+        }
 
         //adding view counter
         $data['story']->addViewCounterPlusOne();
