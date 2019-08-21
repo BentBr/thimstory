@@ -71,6 +71,13 @@ class StorySubscriptions extends Model
         return $isSubscriptionSet;
     }
 
+    /**
+     * Subscribing defined user where $storyId is the one being subscribed to by $userId
+     *
+     * @param $subscribedUserId
+     * @param $userId
+     * @return bool
+     */
     public function subscribe($storyId, $userId)
     {
         $this->stories_id = $storyId;
@@ -79,6 +86,12 @@ class StorySubscriptions extends Model
         return $this->save();
     }
 
+    /**
+     * Deleting of subscription from DB
+     *
+     * @return bool|null
+     * @throws \Exception
+     */
     public function unsubscribe()
     {
         return $this->delete();
