@@ -4,10 +4,11 @@ namespace thimstory\Http\Controllers;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 use thimstory\Events\UserLogin;
 use thimstory\Events\UserRegister;
 use thimstory\Events\UserDelete;
+use thimstory\Models\UserSubscriptions;
 use thimstory\Models\User;
 use Illuminate\Http\Request;
 use Exception;
@@ -29,6 +30,16 @@ class UserController extends Controller
         $data['user'] = User::getUserByUsername($username);
         $data['stories'] = $data['user']->stories;
         $data['subscriptions'] = $data['user']->subscriptions;
+
+        //getting if user is subscriber of certain story
+        if(Auth::check()) {
+
+            $data['userSubscribed'] = UserSubscriptions
+                ::isSubscriptionSet($data['user']->id, Auth::user()->id);
+        } else {
+
+            $data['userSubscribed'] = null;
+        }
 
         return view('users.profile', $data);
     }

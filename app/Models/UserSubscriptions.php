@@ -49,4 +49,46 @@ class UserSubscriptions extends Model
     {
         return $this->belongsTo('\thimstory\Models\User', 'subscribed_user_id');
     }
+
+    /**
+     * Returns existing subscription if exists
+     *
+     * @param $subscribedUserId
+     * @param $userId
+     * @return mixed
+     */
+    public static function isSubscriptionSet($subscribedUserId, $userId)
+    {
+        $isSubscriptionSet = UserSubscriptions::where('subscribed_user_id', $subscribedUserId)
+            ->where('user_id', $userId)
+            ->first();
+
+        return $isSubscriptionSet;
+    }
+
+    /**
+     * Subscribing defined user where $subscribedUserId is the one being subscribed to by $userId
+     *
+     * @param $subscribedUserId
+     * @param $userId
+     * @return bool
+     */
+    public function subscribe($subscribedUserId, $userId)
+    {
+        $this->subscribed_user_id = $subscribedUserId;
+        $this->user_id = $userId;
+
+        return $this->save();
+    }
+
+    /**
+     * Deleting of subscription from DB
+     *
+     * @return bool|null
+     * @throws \Exception
+     */
+    public function unsubscribe()
+    {
+        return $this->delete();
+    }
 }

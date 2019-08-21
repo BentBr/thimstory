@@ -6,7 +6,7 @@
     <a href="{{ Route('privacy-policy') }}">Privacy Policy</a>
 </nav>
 @auth()
-    <span>You are logged in!</span>
+    <span>Welcome {{ Auth::user()->name }}, you are logged in!</span>
     <v-list>
         <v-list-item>
             <v-list-item-title><a href="/{{ Auth()->user()->url_name }}">{{ Auth()->user()->name }}</a></v-list-item-title>
