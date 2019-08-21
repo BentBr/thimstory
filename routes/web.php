@@ -54,6 +54,5 @@ Route::middleware('auth')->group(function () {
     //subscriptions auth
     Route::put('/subscription/story', 'SubscriptionController@putStorySubscription')->name('putStorySubscription'); //done
     Route::put('/subscription/user', 'SubscriptionController@putUserSubscription')->name('putUserSubscription'); //done
-    Route::get('/subscriptions/{userId}', 'SubscriptionController@getSubscriptions')->name('getSubscriptions');
 });
 

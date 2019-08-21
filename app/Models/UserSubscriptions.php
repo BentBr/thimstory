@@ -47,7 +47,7 @@ class UserSubscriptions extends Model
      */
     public function subscribedUser()
     {
-        return $this->belongsTo('\thimstory\Models\User', 'subscribed_user_id');
+        return $this->belongsTo('\thimstory\Models\User', 'subscribed_user_id', 'id');
     }
 
     /**

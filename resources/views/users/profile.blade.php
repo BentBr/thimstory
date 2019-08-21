@@ -68,10 +68,19 @@
                             <br>
 
                         <h2>User Subs</h2>
-                        @if(isset($subscriptions))
-                            @foreach($subscriptions as $subscription)
-                                {{ $subscription->stories->name }}
-                            @endforeach
+                        @if(! is_null($subscriptions))
+                            @if(count($subscriptions['storySubscriptions']))
+                                <strong>Story subs</strong><br>
+                                @foreach($subscriptions['storySubscriptions'] as $storySubscription)
+                                    {{ $storySubscription->stories->name }}<br>
+                                @endforeach
+                            @endif
+                            @if(count($subscriptions['userSubscriptions']))
+                                <strong>User subs</strong><br>
+                                @foreach($subscriptions['userSubscriptions'] as $userSubscription)
+                                    {{ $userSubscription->subscribedUser->name }}<br>
+                                @endforeach
+                            @endif
                         @endif
                     </div>
                 </div>

@@ -29,9 +29,9 @@ class UserController extends Controller
         //getting requested data
         $data['user'] = User::getUserByUsername($username);
         $data['stories'] = $data['user']->stories;
-        $data['subscriptions'] = $data['user']->subscriptions;
+        $data['subscriptions'] = $data['user']->getAllUserSubscriptions();
 
-        //getting if user is subscriber of certain story
+        //getting if auth user is subscriber of certain user
         if(Auth::check()) {
 
             $data['userSubscribed'] = UserSubscriptions
