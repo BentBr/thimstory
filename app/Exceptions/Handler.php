@@ -4,6 +4,7 @@ namespace thimstory\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\Console\Exception\CommandNotFoundException;
 
 class Handler extends ExceptionHandler
 {
@@ -13,7 +14,7 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        //
+        CommandNotFoundException::class,
     ];
 
     /**
