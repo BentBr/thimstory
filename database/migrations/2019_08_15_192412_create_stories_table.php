@@ -22,6 +22,7 @@ class CreateStoriesTable extends Migration
             $table->bigInteger('views')->default(0);
             $table->bigInteger('follower')->default(0);
             $table->timestamps();
+            $table->boolean('cron_update_needed')->default(0);
             $table->softDeletes();
 
             //foreign keys
@@ -37,6 +38,7 @@ class CreateStoriesTable extends Migration
             $table->bigInteger('views')->default(0);
             $table->string('mime_type');
             $table->timestamps();
+            $table->boolean('cron_update_needed')->default(0);
             $table->softDeletes();
 
             //foreign keys

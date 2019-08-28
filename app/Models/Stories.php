@@ -26,6 +26,15 @@ class Stories extends Model
     ];
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'cron_update_needed'  => 'boolean',
+    ];
+
+    /**
      * @return Eloquent\Relations\BelongsTo
      */
     public function user()
@@ -70,6 +79,7 @@ class Stories extends Model
         $this->name     = $name;
         $this->user_id  = $user->id;
         $this->url_name = rawurlencode($name);
+        $this->cron_update_needed = true;
 
         return $this->save();
     }

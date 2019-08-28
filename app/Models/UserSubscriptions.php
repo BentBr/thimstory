@@ -27,7 +27,6 @@ class UserSubscriptions extends Model
      * @var array
      */
     protected $casts = [
-        'update'            => 'boolean',
     ];
 
     /**

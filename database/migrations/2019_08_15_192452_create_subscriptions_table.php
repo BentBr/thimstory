@@ -18,7 +18,6 @@ class CreateSubscriptionsTable extends Migration
             $table->uuid('id')->primary();
             $table->uuid('stories_id');
             $table->uuid('user_id');
-            $table->boolean('update')->default(0);
             $table->timestamps();
 
             //foreign keys
@@ -33,7 +32,6 @@ class CreateSubscriptionsTable extends Migration
             $table->uuid('id')->primary();
             $table->uuid('subscribed_user_id');
             $table->uuid('user_id');
-            $table->boolean('update')->default(0);
             $table->timestamps();
 
             //foreign keys
