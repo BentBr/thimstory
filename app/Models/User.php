@@ -59,14 +59,6 @@ class User extends Authenticatable
     /**
      * @return Eloquent\Relations\HasMany
      */
-    public function storySubscriptions()
-    {
-        return $this->HasMany('\thimstory\Models\StorySubscriptions');
-    }
-
-    /**
-     * @return Eloquent\Relations\HasMany
-     */
     public function userSubscriptions()
     {
         return $this->HasMany('\thimstory\Models\UserSubscriptions', 'subscribed_user_id');

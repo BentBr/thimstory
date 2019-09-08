@@ -50,14 +50,6 @@ class Stories extends Model
         return $this->HasMany('\thimstory\Models\StoryDetails');
     }
 
-    /**
-     * @return Eloquent\Relations\HasMany
-     */
-    public function storySubscriptions()
-    {
-        return $this->HasMany('\thimstory\Models\StorySubscriptions');
-    }
-
     public static function getStoryByUrlName($userId, $story)
     {
         return Stories::where('user_id', $userId)
