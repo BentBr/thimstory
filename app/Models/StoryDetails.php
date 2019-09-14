@@ -23,15 +23,6 @@ class StoryDetails extends Model
     ];
 
     /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'cron_update_needed'  => 'boolean',
-    ];
-
-    /**
      * @return Eloquent\Relations\BelongsTo
      */
     public function stories()

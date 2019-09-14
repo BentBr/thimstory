@@ -22,14 +22,6 @@ class UserSubscriptions extends Model
     ];
 
     /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-    ];
-
-    /**
      * Describes user which subscribed to another one
 
      * @return Eloquent\Relations\BelongsTo

@@ -56,13 +56,37 @@ class SendSubscriptionMailToSubscriber extends Command
             })->get();
 
         //todo: send mail to every user of subscriptions
-        //todo: avoid redundant mails if users have user + story subs
+        //todo: avoid redundant mails if users do have multiple updates
         foreach ($userSubscriptions as $userSubscription) {
 
-            echo "Story Author " . $userSubscription->subscribedUser->stories->user->name . "\n";
+            echo "Story Author " . $userSubscription->subscribedUser->name . "\n";
+
+            //all stories of user
+            foreach ($userSubscription->subscribedUser->stories as $story) {
+
+                //stories with update
+                if ($story->cron_update_needed) {
+
+                }
+
+                //all details of story
+                foreach ($story->storyDetails as $storyDetail) {
+
+                    //story details with update
+                    if ($storyDetail->cron_update_needed) {
+
+                    }
+                }
+            }
+
+            //foreach user id in update == user id in subscribed -> delete updates afterwards
+            echo "Story with update " . $userSubscription->subscribedUser->stories[0]->id . "\n";
+            echo "Has update: " .$userSubscription->subscribedUser->stories[0]->cron_update_needed . "\n";
+
 
             //could be multiple->collection
-            echo "Story Detail id with update" . $userSubscription->stories->storyDetails[0]->id . "\n";
+            echo "Story Detail with update " . $userSubscription->subscribedUser->stories[0]->storyDetails[0]->id . "\n";
+            echo "Has update: " .$userSubscription->subscribedUser->stories[0]->storyDetails[0]->cron_update_needed . "\n";
 
             echo "Update Recipient " . $userSubscription->user->name . "\n";
 
@@ -74,7 +98,8 @@ class SendSubscriptionMailToSubscriber extends Command
         //setting cron_update_needed to false again
         foreach ($userSubscriptions as $userSubscription) {
 
-echo 'ping';
+
+
         }
 
         //todo: set cron_update_needed to false
@@ -86,7 +111,7 @@ echo 'ping';
             $mailStack ='';
         }
 exit;
-        //send login mail for each in mail stack
+        //send update mail for each in mail stack
         foreach($mailStack as $mail) {
 
             try {

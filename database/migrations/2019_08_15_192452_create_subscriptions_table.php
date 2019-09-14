@@ -26,6 +26,20 @@ class CreateSubscriptionsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');
         });
+
+        //table for user_subscriptions
+        Schema::create('subscription_updates', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->uuid('update_user_id');
+            $table->uuid('updated_story');
+            $table->timestamps();
+
+            //foreign keys
+            $table->foreign('update_user_id')->references('id')->on('users')
+                ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('updated_story')->references('id')->on('stories')
+                ->onUpdate('cascade')->onDelete('cascade');
+        });
     }
 
     /**
@@ -36,5 +50,6 @@ class CreateSubscriptionsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('user_subscriptions');
+        Schema::dropIfExists('subscription_updates');
     }
 }
