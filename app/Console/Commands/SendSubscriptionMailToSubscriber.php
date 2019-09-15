@@ -50,12 +50,12 @@ class SendSubscriptionMailToSubscriber extends Command
          * getting all relevant subs (through updates)                  //check
          * getting all relevant users, stories, authors (through subs)  //check, check, check
          *
-         * creating stack of notifications                              //check via smart query
+         * creating stack of notifications                              //check via "smart" query
          * sending notifications                                        //check
          * having proper mail content                                   //check
-         * (logging sent per notification)                              //
+         * (logging sent per notification)                              //open
          *
-         * increasing counter for notifications_sent on subs            //
+         * increasing counter for notifications_sent on subs            //check
          * deleting updates                                             //check
          *
          *
