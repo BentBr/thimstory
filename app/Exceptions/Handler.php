@@ -15,6 +15,7 @@ class Handler extends ExceptionHandler
      */
     protected $dontReport = [
         CommandNotFoundException::class,
+        NotYetAllowedToCreateException::class,
     ];
 
     /**
