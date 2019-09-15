@@ -82,4 +82,17 @@ class UserSubscriptions extends Model
     {
         return $this->delete();
     }
+
+    /**
+     * Increments counter + 1 for notifications sent without changing timestamps
+     *
+     * @return bool
+     */
+    public function incrementSentCounter()
+    {
+        $this->timestamps = false;
+        $this->notifications_sent++;
+
+        return $this->save();
+    }
 }

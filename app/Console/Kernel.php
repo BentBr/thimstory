@@ -30,6 +30,8 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('UpdateViewCounts')
             ->everyFiveMinutes();
+        $schedule->command('SendSubscriptionMails')
+            ->everyFiveMinutes();
     }
 
     /**

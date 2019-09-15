@@ -56,4 +56,22 @@ class SubscriptionUpdates extends Model
 
         $this->save();
     }
+
+    /**
+     * Returns all updates which are relevant for sending update mail.
+     * Compares updates with subscriptions.
+     *
+     * @return null|Eloquent\Collection|SubscriptionUpdates[]
+     */
+    public static function getRelevantUpdates()
+    {
+        return SubscriptionUpdates
+            ::with('updatedUser.userSubscriptions.user', 'updatedStory')
+            ->whereIn('update_user_id', function ($query) {
+                $query->select('subscribed_user_id')
+                    ->from('user_subscriptions')
+                    ->get();
+            })
+            ->get();
+    }
 }

@@ -74,15 +74,8 @@ class SendSubscriptionMailToSubscriber extends Command
          */
 
         //getting all updates which have corresponding id in subscriptions
-        //updates of users without sub do not need to send notification
-        $updates = SubscriptionUpdates
-            ::with('updatedUser.userSubscriptions.user', 'updatedStory')
-            ->whereIn('update_user_id', function ($query) {
-                $query->select('subscribed_user_id')
-                    ->from('user_subscriptions')
-                    ->get();
-            })
-            ->get();
+        //updates of users without subs do not need to trigger notification
+        $updates = SubscriptionUpdates::getRelevantUpdates();
 
         //looping though all relevant updates
         foreach ($updates as $update) {
@@ -94,18 +87,26 @@ class SendSubscriptionMailToSubscriber extends Command
                 if(in_array($subscription->subscribed_user_id, (array) $update)) {
 
                     //sending an email for every subscription
-                    event(new SubscribingUserUpdate($subscription->user, $update->updatedUser, $update->event, $update->updatedStory));
-                    $subscription->timestamps = false;
-                    $subscription->notifications_sent++;
+                    if (event(new SubscribingUserUpdate($subscription->user, $update->updatedUser, $update->event, $update->updatedStory))) {
+
+                        //updating such as send mail counter + 1
+                        if (! $subscription->incrementSentCounter()) {
+                            return false;
+                        }
+                    } else {
+
+                        return false;
+                    }
                 }
             }
-            //saving once after all subs have been worked through //todo: check if is working
-            $update->updatedUser->userSubscriptions->save();
         }
 
         //deleting all updates after successful iteration
-        SubscriptionUpdates::truncate();
+        if (! SubscriptionUpdates::truncate()) {
 
-        return 'huhu';
+            return false;
+        }
+
+        return true; //todo: proper logging needed
     }
 }
