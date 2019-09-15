@@ -28,8 +28,6 @@ class UserController extends Controller
     {
         //getting requested data
         $data['user'] = User::getUserByUsername($username);
-        $data['user']->DateForNextStory = $data['user']->getDateForNextStory();
-        $data['user']->DateForNextStoryDetail = $data['user']->getDateForNextStoryDetail();
         $data['stories'] = $data['user']->stories;
         $data['subscriptions'] = $data['user']->getAllUserSubscriptions();
 

@@ -223,7 +223,7 @@ class User extends Authenticatable
      * Gives datetime on which user can add another story
      * Returns null if is in past
      *
-     * @return mixed
+     * @return null|Carbon
      */
     public function getDateForNextStory()
     {
@@ -232,15 +232,15 @@ class User extends Authenticatable
             return null;
         } else {
 
-            return $this->new_story_possible_at;
+            return $this->new_story_possible_at->diffForHumans();
         }
     }
 
     /**
      * Gives datetime on which user can add another story detail
-     * If is null (new user) or in past (null as well) user can add new one
+     * Returns null if is in past
      *
-     * @return mixed
+     * @return null|Carbon
      */
     public function getDateForNextStoryDetail()
     {
@@ -249,7 +249,7 @@ class User extends Authenticatable
             return null;
         } else {
 
-            return $this->new_story_detail_possible_at;
+            return $this->new_story_detail_possible_at->diffForHumans();
         }
     }
 }

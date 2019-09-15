@@ -17,6 +17,24 @@
         <v-list-item>
             <v-list-item-title><a href="{{ Route('logout')  }}">Logout!</a></v-list-item-title>
         </v-list-item>
+        @if(is_null(Auth()->user()->getDateForNextStory()))
+            <v-list-item>
+                <v-list-item-title>You can add a new Story!</v-list-item-title>
+            </v-list-item>
+        @else
+            <v-list-item>
+                <v-list-item-title>You can add a new Story soon: {{ Auth()->user()->getDateForNextStory() }}</v-list-item-title>
+            </v-list-item>
+        @endif
+        @if(is_null(Auth()->user()->getDateForNextStoryDetail()))
+            <v-list-item>
+                <v-list-item-title>You can add a new Detail!</v-list-item-title>
+            </v-list-item>
+        @else
+            <v-list-item>
+                <v-list-item-title>You can add a new Story Detail soon: {{ Auth()->user()->getDateForNextStoryDetail() }}</v-list-item-title>
+            </v-list-item>
+        @endif
     </v-list>
 @endauth
 @guest
