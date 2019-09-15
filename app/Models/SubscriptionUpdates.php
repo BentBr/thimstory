@@ -33,12 +33,14 @@ class SubscriptionUpdates extends Model
     /**
      * Describes which story has been updated
      *
-     * @return Eloquent\Relations\HasOne
+     * @return Eloquent\Relations\BelongsTo
      */
     public function updatedStory()
     {
-        return $this->hasOne('\thimstory\Models\Stories', 'updated_story', 'id');
+        return $this->belongsTo('\thimstory\Models\Stories', 'updated_story', 'id');
     }
+
+
 
     /**
      * Creates a subscription update with event new Story

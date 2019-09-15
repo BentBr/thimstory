@@ -4,7 +4,9 @@ namespace thimstory\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use thimstory\Events\NewStoryOrDetail;
+use thimstory\Events\SubscribingUserUpdate;
 use thimstory\Listeners\CreateSubscriptionUpdate;
+use thimstory\Listeners\SendSubscribingUserUpdateMail;
 use thimstory\Listeners\SendUserDeleteMail;
 use thimstory\Listeners\SendUserLoginMail;
 use thimstory\Listeners\SendUserRegisterMail;
@@ -31,6 +33,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         NewStoryOrDetail::class => [
             CreateSubscriptionUpdate::class,
+        ],
+        SubscribingUserUpdate::class => [
+            SendSubscribingUserUpdateMail::class,
         ],
     ];
 

@@ -28,7 +28,7 @@ class SendSubscribingUserUpdateMail
     public function handle($event)
     {
         Mail::to($event->subscribingUser->email)->send(
-            new SubscribingUserUpdateMail($event->subscribingUser, $event->updatedUser, $event->content)
+            new SubscribingUserUpdateMail($event->subscribingUser, $event->updatedUser, $event->content, $event->story)
         );
     }
 }

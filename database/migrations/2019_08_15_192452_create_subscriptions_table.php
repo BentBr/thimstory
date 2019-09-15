@@ -18,6 +18,7 @@ class CreateSubscriptionsTable extends Migration
             $table->uuid('id')->primary();
             $table->uuid('subscribed_user_id');
             $table->uuid('user_id');
+            $table->integer('notifications_sent')->default(0);
             $table->timestamps();
 
             //foreign keys

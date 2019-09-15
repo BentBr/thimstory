@@ -9,13 +9,14 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use thimstory\Models\Stories;
 use thimstory\Models\User;
 
 class SubscribingUserUpdate
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $subscribingUser, $updatedUser, $content;
+    public $subscribingUser, $updatedUser, $content, $story;
 
     /**
      * Create a new event instance.
@@ -24,12 +25,14 @@ class SubscribingUserUpdate
      * @param User $subscribingUser
      * @param User $updatedUser
      * @param $content
+     * @param Stories $story
      */
-    public function __construct(User $subscribingUser, User $updatedUser, $content)
+    public function __construct(User $subscribingUser, User $updatedUser, $content, Stories $story)
     {
         $this->subscribingUser  = $subscribingUser;
         $this->updatedUser      = $updatedUser;
         $this->content          = $content;
+        $this->story            = $story;
     }
 
     /**
