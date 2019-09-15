@@ -3,12 +3,12 @@
 namespace thimstory\Http\Controllers;
 
 use thimstory\Models\StoryDetails;
-use thimstory\Models\StorySubscriptions;
 use thimstory\Models\User;
 use thimstory\Models\Stories;
 use Auth;
 use Illuminate\Http\Request;
 use File;
+use thimstory\Models\UserSubscriptions;
 
 class StoryController extends Controller
 {
@@ -22,8 +22,19 @@ class StoryController extends Controller
     {
         //getting requested data
         $data['user'] = User::getUserByUsername($username);
+
         //sorting must be forced due to uuid which has no intrinsic sorting in collection
         $data['stories'] = $data['user']->stories->sortBy('created_at');
+
+        //getting if user is subscriber of certain story
+        if(Auth::check()) {
+
+            $data['userSubscribed'] = UserSubscriptions
+                ::isSubscriptionSet($data['user']->id, Auth::user()->id);
+        } else {
+
+            $data['userSubscribed'] = null;
+        }
 
         return view('stories.stories', $data);
     }
@@ -40,14 +51,15 @@ class StoryController extends Controller
         //getting requested data
         $data['user'] = User::getUserByUsername($username);
         $data['story'] = Stories::getStoryByUrlName($data['user']->id, $story);
+
         //sorting must be forced due to uuid which has no intrinsic sorting in collection
         $data['storyDetails'] = $data['story']->storyDetails->sortBy('story_counter');
 
         //getting if user is subscriber of certain story
         if(Auth::check()) {
 
-            $data['userSubscribed'] = StorySubscriptions
-                ::isSubscriptionSet($data['story']->id, Auth::user()->id);
+            $data['userSubscribed'] = UserSubscriptions
+                ::isSubscriptionSet($data['user']->id, Auth::user()->id);
         } else {
 
             $data['userSubscribed'] = null;

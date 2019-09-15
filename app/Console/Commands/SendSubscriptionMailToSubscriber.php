@@ -4,7 +4,6 @@ namespace thimstory\Console\Commands;
 
 use Illuminate\Console\Command;
 use thimstory\Events\SubscribingUserUpdate;
-use thimstory\Models\StorySubscriptions;
 use thimstory\Models\UserSubscriptions;
 use Exception;
 

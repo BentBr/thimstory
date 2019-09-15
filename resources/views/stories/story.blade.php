@@ -37,22 +37,25 @@
                             <br>
                         @endif
                         @auth()
-                            <h2>Subscribe!!</h2>
+                            @if(Auth::user()->id != $user->id)
+                                <h2>Subscribe!!</h2>
 
-                            <form method="POST" action="{{ route('putStorySubscription') }}">
-                                @csrf
-                                <input type="hidden" name="_method" value="PUT">
-                                <input type="hidden" name="story_id" value="{{ $story->id }}">
-                                <br>
-                                @if(is_null($userSubscribed))
-                                    <button type="submit" class="btn btn-primary"><span style="color:mediumblue">Subscribe</span></button>
+                                <form method="POST" action="{{ route('putUserSubscription') }}">
+                                    @csrf
+                                    <input type="hidden" name="_method" value="PUT">
+                                    <input type="hidden" name="subscribed_user_id" value="{{ $user->id }}">
+                                    <input type="hidden" name="location_redirect" value="/{{ $user->url_name . '/' . $story->url_name }}">
+                                    <br>
+                                    @if(is_null($userSubscribed))
+                                        <button type="submit" class="btn btn-primary"><span style="color:mediumblue">Subscribe</span></button>
 
-                                @else
-                                    <button type="submit" class="btn btn-primary"><span style="color:darkred">Unsubscribe</span></button>
+                                    @else
+                                        <button type="submit" class="btn btn-primary"><span style="color:darkred">Unsubscribe</span></button>
 
-                                @endif
+                                    @endif
 
-                            </form>
+                                </form>
+                            @endif
                         @endauth
                         <br><br>
                         <h2>Add Detail</h2>

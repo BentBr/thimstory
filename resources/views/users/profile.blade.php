@@ -20,6 +20,7 @@
                                 @csrf
                                 <input type="hidden" name="_method" value="PUT">
                                 <input type="hidden" name="subscribed_user_id" value="{{ $user->id }}">
+                                <input type="hidden" name="location_redirect" value="/{{ $user->url_name }}">
                                 <br>
                                 @if(is_null($userSubscribed))
                                     <button type="submit" class="btn btn-primary"><span style="color:mediumblue">Subscribe</span></button>
@@ -62,23 +63,21 @@
                         <h2>User Stories</h2>
                         @if(isset($stories))
                             @foreach($stories as $story)
-                                {{ $story->name }}
+                                <a href="/{{ $user->url_name }}/{{ $story->url_name }}">
+                                    {{ $story->name }}
+                                </a><br>
                             @endforeach
                         @endif
                             <br>
 
                         <h2>User Subs</h2>
                         @if(! is_null($subscriptions))
-                            @if(count($subscriptions['storySubscriptions']))
-                                <strong>Story subs</strong><br>
-                                @foreach($subscriptions['storySubscriptions'] as $storySubscription)
-                                    {{ $storySubscription->stories->name }}<br>
-                                @endforeach
-                            @endif
                             @if(count($subscriptions['userSubscriptions']))
                                 <strong>User subs</strong><br>
                                 @foreach($subscriptions['userSubscriptions'] as $userSubscription)
-                                    {{ $userSubscription->subscribedUser->name }}<br>
+                                    <a href="/{{ $userSubscription->subscribedUser->url_name }}">
+                                        {{ $userSubscription->subscribedUser->name }}
+                                    </a><br>
                                 @endforeach
                             @endif
                         @endif

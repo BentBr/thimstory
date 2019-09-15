@@ -45,7 +45,6 @@ class Stories extends Model
     {
         return Stories::where('user_id', $userId)
             ->where('name', $story)
-            ->with('storySubscriptions')
             ->firstOrFail();
     }
 

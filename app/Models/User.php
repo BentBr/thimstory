@@ -9,7 +9,6 @@ use Illuminate\Support\Collection;
 use Str;
 use thimstory\Models\Concerns\UsesUuid;
 use Illuminate\Database\Eloquent;
-use thimstory\Models\StorySubscriptions;
 use thimstory\Models\UserSubscriptions;
 
 class User extends Authenticatable
@@ -202,13 +201,11 @@ class User extends Authenticatable
     public function getAllUserSubscriptions()
     {
         //getting subs
-        $subscriptions['storySubscriptions'] = StorySubscriptions::where('user_id', $this->id)
-            ->get();
         $subscriptions['userSubscriptions'] = UserSubscriptions::where('user_id', $this->id)
             ->get();
 
         //checking if present
-        if(count($subscriptions['storySubscriptions']) == 0 && count($subscriptions['userSubscriptions']) == 0) {
+        if(count($subscriptions['userSubscriptions']) == 0) {
 
             return null;
         }
