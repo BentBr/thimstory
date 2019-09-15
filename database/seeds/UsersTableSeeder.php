@@ -19,6 +19,8 @@ class UsersTableSeeder extends Seeder
             'name'      => 'Bent',
             'url_name'  => rawurlencode('Bent'),
             'email'     => 'mail@bent-brueggemann.de',
+            'new_story_possible_at' => now(),
+            'new_story_detail_possible_at' => now(),
         ]);
 
         //#1 testuser
@@ -27,6 +29,8 @@ class UsersTableSeeder extends Seeder
             'name'      => 'Bent Test1',
             'url_name'  => rawurlencode('Bent Test1'),
             'email'     => 'bent@bent-brueggemann.de',
+            'new_story_possible_at' => now(),
+            'new_story_detail_possible_at' => now(),
         ]);
 
         //creating 50 random user

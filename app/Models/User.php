@@ -5,6 +5,7 @@ namespace thimstory\Models;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Str;
 use thimstory\Models\Concerns\UsesUuid;
@@ -27,6 +28,8 @@ class User extends Authenticatable
         'url_name',
         'email',
         'password',
+        'new_story_possible_at',
+        'new_story_detail_possible_at',
     ];
 
     /**
@@ -44,7 +47,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at'     => 'datetime',
+        'email_verified_at'             => 'datetime',
+        'new_story_possible_at'         => 'datetime',
+        'new_story_detail_possible_at'  => 'datetime',
     ];
 
     /**
@@ -146,9 +151,11 @@ class User extends Authenticatable
     public function createUserWithEmail($email)
     {
         //create new user
-        $this->email = $email;
-        $this->name = $email;
-        $this->url_name = rawurlencode($email);
+        $this->email                        = $email;
+        $this->name                         = $email;
+        $this->url_name                     = rawurlencode($email);
+        $this->new_story_possible_at        = now();
+        $this->new_story_detail_possible_at = now();
 
         return $this->save();
     }
@@ -210,5 +217,39 @@ class User extends Authenticatable
             return null;
         }
         return $subscriptions;
+    }
+
+    /**
+     * Gives datetime on which user can add another story
+     * Returns null if is in past
+     *
+     * @return mixed
+     */
+    public function getDateForNextStory()
+    {
+        if (Carbon::now() > $this->new_story_possible_at) {
+
+            return null;
+        } else {
+
+            return $this->new_story_possible_at;
+        }
+    }
+
+    /**
+     * Gives datetime on which user can add another story detail
+     * If is null (new user) or in past (null as well) user can add new one
+     *
+     * @return mixed
+     */
+    public function getDateForNextStoryDetail()
+    {
+        if (Carbon::now() > $this->new_story_detail_possible_at) {
+
+            return null;
+        } else {
+
+            return $this->new_story_detail_possible_at;
+        }
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -19,7 +20,9 @@ class CreateUsersTable extends Migration
             $table->string('url_name')->index();
             $table->string('email')->unique();
             $table->bigInteger('views')->default(0);
-            $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('email_verified_at')->default(now());
+            $table->timestamp('new_story_possible_at')->default(now());
+            $table->timestamp('new_story_detail_possible_at')->default(now());
             $table->rememberToken()->index();
             $table->timestamps();
             $table->softDeletes();
