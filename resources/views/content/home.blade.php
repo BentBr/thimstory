@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="flex-center position-ref full-height">
-
+{{$errors}}
                     <div class="content">
                         <div class="title m-b-md">
                             This is {{ Route::currentRouteName() }} path

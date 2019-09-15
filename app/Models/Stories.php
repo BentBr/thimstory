@@ -2,9 +2,11 @@
 
 namespace thimstory\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use thimstory\Events\NewStoryOrDetail;
+use thimstory\Exceptions\NotYetAllowedToCreateException;
 use thimstory\Models\Concerns\UsesUuid;
 use Illuminate\Database\Eloquent;
 
@@ -55,9 +57,15 @@ class Stories extends Model
      * @param $name
      * @param User $user
      * @return bool
+     * @throws NotYetAllowedToCreateException
      */
     public function create($name, User $user)
     {
+        if (! is_null($user->getDateForNextStory())) {
+
+            throw new NotYetAllowedToCreateException();
+        }
+
         //create new story
         $this->name     = $name;
         $this->user_id  = $user->id;
@@ -67,6 +75,10 @@ class Stories extends Model
 
             //adding new update event
             event(new NewStoryOrDetail( $user, $this,'newStory'));
+
+            //changing timestamp for new_story_possible_at
+            $user->new_story_possible_at = Carbon::now()->addHours(config('thimstory.hours_to_next_story'));
+            $user->save();
 
             return true;
 
