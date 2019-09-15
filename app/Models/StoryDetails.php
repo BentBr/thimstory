@@ -5,6 +5,7 @@ namespace thimstory\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use thimstory\Events\NewStoryOrDetail;
 use thimstory\Models\Concerns\UsesUuid;
 
 class StoryDetails extends Model
@@ -60,9 +61,17 @@ class StoryDetails extends Model
         $this->stories_id = $story->id;
         $this->story_counter = $count;
         $this->mime_type = $mimeType;
-        $this->cron_update_needed = true;
 
-        return $this->save();
+        if ($this->save()) {
+
+            //adding new update event
+            event(new NewStoryOrDetail( $story->user, $story,'newStoryDetail'));
+
+            return true;
+
+        } else {
+            return false;
+        }
     }
 
     /**

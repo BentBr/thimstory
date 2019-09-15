@@ -4,6 +4,7 @@ namespace thimstory\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use thimstory\Events\NewStoryOrDetail;
 use thimstory\Models\Concerns\UsesUuid;
 use Illuminate\Database\Eloquent;
 
@@ -61,9 +62,17 @@ class Stories extends Model
         $this->name     = $name;
         $this->user_id  = $user->id;
         $this->url_name = rawurlencode($name);
-        $this->cron_update_needed = true;
 
-        return $this->save();
+        if ($this->save()) {
+
+            //adding new update event
+            event(new NewStoryOrDetail( $user, $this,'newStory'));
+
+            return true;
+
+        } else {
+            return false;
+        }
     }
 
     /**

@@ -39,4 +39,19 @@ class SubscriptionUpdates extends Model
     {
         return $this->hasOne('\thimstory\Models\Stories', 'updated_story', 'id');
     }
+
+    /**
+     * Creates a subscription update with event new Story
+     *
+     * @param User $user
+     * @param Stories $story
+     */
+    public function createWithType(User $user, Stories $story, $type)
+    {
+        $this->update_user_id = $user->id;
+        $this->updated_story = $story->id;
+        $this->event = $type;
+
+        $this->save();
+    }
 }

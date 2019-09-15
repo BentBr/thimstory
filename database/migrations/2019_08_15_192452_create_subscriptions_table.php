@@ -32,6 +32,7 @@ class CreateSubscriptionsTable extends Migration
             $table->uuid('id')->primary();
             $table->uuid('update_user_id');
             $table->uuid('updated_story');
+            $table->string('event');    //newStory + newDetail
             $table->timestamps();
 
             //foreign keys

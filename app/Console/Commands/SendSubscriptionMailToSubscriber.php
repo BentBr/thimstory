@@ -5,6 +5,7 @@ namespace thimstory\Console\Commands;
 use Illuminate\Console\Command;
 use thimstory\Events\SubscribingUserUpdate;
 use thimstory\Models\UserSubscriptions;
+use thimstory\Models\SubscriptionUpdates;
 use Exception;
 
 class SendSubscriptionMailToSubscriber extends Command
@@ -42,7 +43,7 @@ class SendSubscriptionMailToSubscriber extends Command
     public function handle()
     {
         /*
-         * Users are subscribing other users. A users gets updated if he is adding a new story or a new story detail
+         * Users are subscribing other users. Users gets updated if he is adding a new story or a new story detail
          * An email is sent to every user subscriber of which stories got updated
          * An email is sent to every user subscriber of which story details of certain stories got updated
          */
