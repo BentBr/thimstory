@@ -25,9 +25,13 @@
 
         @include('menus.top-navbar')
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+        <v-content>
+            <v-container>
+                <v-row align="center" justify="center">
+                    @yield('content')
+                </v-row>
+            </v-container>
+        </v-content>
     </v-app>
 </body>
 </html>

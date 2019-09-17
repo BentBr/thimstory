@@ -21,6 +21,8 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('login-form-component', require('./components/LoginFormComponent.vue').default);
+Vue.component('navigation-drawer-component', require('./components/NavigationDrawerComponent.vue').default);
+Vue.component('toolbar-component', require('./components/ToolbarComponent.vue').default);
 
 
 import Vuetify, {
@@ -34,6 +36,19 @@ import Vuetify, {
     VCol,
     VTextField,
     VImg,
+    VNavigationDrawer,
+    VBtn,
+    VAppBar,
+    VToolbar,
+    VIcon,
+    VAvatar,
+    VAppBarNavIcon,
+    VToolbarTitle,
+    VListItemAction,
+    VListItemContent,
+    VListItemGroup,
+    VListGroup,
+    VContent,
 } from 'vuetify/lib'
 import { Ripple } from 'vuetify/lib/directives'
 
@@ -49,6 +64,19 @@ Vue.use(Vuetify, {
         VCol,
         VTextField,
         VImg,
+        VNavigationDrawer,
+        VBtn,
+        VAppBar,
+        VToolbar,
+        VIcon,
+        VAvatar,
+        VAppBarNavIcon,
+        VToolbarTitle,
+        VListItemAction,
+        VListItemContent,
+        VListItemGroup,
+        VListGroup,
+        VContent,
     },
     directives: {
         Ripple,

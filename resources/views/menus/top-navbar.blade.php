@@ -1,3 +1,6 @@
+<navigation-drawer-component></navigation-drawer-component>
+<toolbar-component></toolbar-component>
+
 
 <nav>
     <a href="{{ Route('home') }}">Home</a>
