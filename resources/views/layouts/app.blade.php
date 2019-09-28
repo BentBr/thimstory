@@ -26,7 +26,7 @@
         @include('menus.top-navbar')
 
         <v-content>
-            <v-container>
+            <v-container class="fill-height" fluid>
                 <v-row align="center" justify="center">
                     @yield('content')
                 </v-row>

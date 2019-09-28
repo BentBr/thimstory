@@ -1,4 +1,4 @@
-<navigation-drawer-component></navigation-drawer-component>
+
 <toolbar-component></toolbar-component>
 
 

@@ -21,7 +21,6 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('login-form-component', require('./components/LoginFormComponent.vue').default);
-Vue.component('navigation-drawer-component', require('./components/NavigationDrawerComponent.vue').default);
 Vue.component('toolbar-component', require('./components/ToolbarComponent.vue').default);
 
 
@@ -49,7 +48,15 @@ import Vuetify, {
     VListItemGroup,
     VListGroup,
     VContent,
+    VCard,
+    VCardText,
+    VCardTitle,
+    VCardActions,
+    VDialog,
+    VTooltip,
 } from 'vuetify/lib'
+import Vuex from 'vuex'
+import store from './store'
 import { Ripple } from 'vuetify/lib/directives'
 
 Vue.use(Vuetify, {
@@ -77,12 +84,19 @@ Vue.use(Vuetify, {
         VListItemGroup,
         VListGroup,
         VContent,
+        VCard,
+        VCardText,
+        VCardTitle,
+        VCardActions,
+        VDialog,
+        VTooltip,
     },
     directives: {
         Ripple,
     },
 })
 
+Vue.use(Vuex)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -93,4 +107,5 @@ Vue.use(Vuetify, {
 const app = new Vue({
     el: '#app',
     vuetify: new Vuetify(),
+    store,
 });
