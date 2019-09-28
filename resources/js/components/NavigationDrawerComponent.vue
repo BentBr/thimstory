@@ -3,6 +3,7 @@
         v-model="drawer"
         :clipped="$vuetify.breakpoint.lgAndUp"
         app
+        right
     >
         <v-list dense>
             <template v-for="item in items">

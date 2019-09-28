@@ -32,6 +32,8 @@
                 </v-row>
             </v-container>
         </v-content>
+
+        @include('menus.footer')
     </v-app>
 </body>
 </html>

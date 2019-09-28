@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 Vue.component('login-form-component', require('./components/LoginFormComponent.vue').default);
 Vue.component('toolbar-component', require('./components/ToolbarComponent.vue').default);
+Vue.component('footer-component', require('./components/FooterComponent.vue').default);
 
 
 import Vuetify, {
@@ -53,6 +54,10 @@ import Vuetify, {
     VCardActions,
     VDialog,
     VTooltip,
+    VSelect,
+    VFooter,
+    VDivider,
+    VCheckbox,
 } from 'vuetify/lib'
 import Vuex from 'vuex'
 import store from './store'
@@ -89,6 +94,9 @@ Vue.use(Vuetify, {
         VCardActions,
         VDialog,
         VTooltip,
+        VSelect,
+        VFooter,
+        VDivider,
     },
     directives: {
         Ripple,

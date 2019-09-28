@@ -7,7 +7,10 @@
         :clipped-left="$vuetify.breakpoint.lgAndUp"
         app
         color="blue darken-3"
+        dense
         dark
+        flat
+        hide-on-scroll
     >
         <v-toolbar-title
             style="width: 300px"
