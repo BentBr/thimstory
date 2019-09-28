@@ -59,6 +59,7 @@
         components: {
             NavigationDrawerComponent
         },
+
         methods: {
             toggleDrawer() {
                 store.dispatch('toggleDrawer')
