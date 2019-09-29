@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 Vue.component('login-form-component', require('./components/LoginFormComponent.vue').default);
 Vue.component('toolbar-component', require('./components/ToolbarComponent.vue').default);
+Vue.component('navigation-drawer-component', require('./components/NavigationDrawerComponent.vue').default);
 Vue.component('footer-component', require('./components/FooterComponent.vue').default);
 
 

@@ -2048,16 +2048,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ToolbarComponent",
-  components: {
-    NavigationDrawerComponent: _NavigationDrawerComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  props: {
+    company: null
   },
   methods: {
     toggleDrawer: function toggleDrawer() {
@@ -40067,87 +40063,79 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "v-app-bar",
+    {
+      attrs: {
+        "clipped-right": _vm.$vuetify.breakpoint.lgAndUp,
+        app: "",
+        dense: "",
+        dark: "",
+        flat: "",
+        "hide-on-scroll": ""
+      }
+    },
     [
-      _c("NavigationDrawerComponent"),
-      _vm._v(" "),
       _c(
-        "v-app-bar",
-        {
-          attrs: {
-            "clipped-right": _vm.$vuetify.breakpoint.lgAndUp,
-            app: "",
-            dense: "",
-            dark: "",
-            flat: "",
-            "hide-on-scroll": ""
-          }
-        },
+        "v-toolbar-title",
+        { staticClass: "ml-0 pl-4", staticStyle: { width: "300px" } },
         [
-          _c(
-            "v-toolbar-title",
-            { staticClass: "ml-0 pl-4", staticStyle: { width: "300px" } },
-            [
-              _c("v-app-bar-nav-icon", {
-                on: {
-                  click: function($event) {
-                    $event.stopPropagation()
-                    return _vm.toggleDrawer($event)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("span", { staticClass: "hidden-sm-and-down" }, [
-                _vm._v("Google Contacts")
-              ])
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("v-text-field", {
-            staticClass: "hidden-sm-and-down",
-            attrs: {
-              flat: "",
-              "solo-inverted": "",
-              "hide-details": "",
-              "prepend-inner-icon": "search",
-              label: "Search"
+          _c("v-app-bar-nav-icon", {
+            on: {
+              click: function($event) {
+                $event.stopPropagation()
+                return _vm.toggleDrawer($event)
+              }
             }
           }),
           _vm._v(" "),
-          _c("div", { staticClass: "flex-grow-1" }),
-          _vm._v(" "),
+          _c("span", { staticClass: "hidden-sm-and-down" }, [
+            _vm._v(_vm._s(_vm.company))
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-text-field", {
+        staticClass: "hidden-sm-and-down",
+        attrs: {
+          flat: "",
+          "solo-inverted": "",
+          "hide-details": "",
+          "prepend-inner-icon": "search",
+          label: "Search"
+        }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex-grow-1" }),
+      _vm._v(" "),
+      _c(
+        "v-btn",
+        { attrs: { icon: "" } },
+        [_c("v-icon", [_vm._v("mdi-apps")])],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-btn",
+        { attrs: { icon: "" } },
+        [_c("v-icon", [_vm._v("mdi-bell")])],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-btn",
+        { attrs: { icon: "", large: "" } },
+        [
           _c(
-            "v-btn",
-            { attrs: { icon: "" } },
-            [_c("v-icon", [_vm._v("mdi-apps")])],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-btn",
-            { attrs: { icon: "" } },
-            [_c("v-icon", [_vm._v("mdi-bell")])],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-btn",
-            { attrs: { icon: "", large: "" } },
+            "v-avatar",
+            { attrs: { size: "32px", item: "" } },
             [
-              _c(
-                "v-avatar",
-                { attrs: { size: "32px", item: "" } },
-                [
-                  _c("v-img", {
-                    attrs: {
-                      src: "https://cdn.vuetifyjs.com/images/logos/logo.svg",
-                      alt: "Vuetify"
-                    }
-                  })
-                ],
-                1
-              )
+              _c("v-img", {
+                attrs: {
+                  src: "https://cdn.vuetifyjs.com/images/logos/logo.svg",
+                  alt: "Vuetify"
+                }
+              })
             ],
             1
           )
@@ -89170,6 +89158,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 Vue.component('login-form-component', __webpack_require__(/*! ./components/LoginFormComponent.vue */ "./resources/js/components/LoginFormComponent.vue")["default"]);
 Vue.component('toolbar-component', __webpack_require__(/*! ./components/ToolbarComponent.vue */ "./resources/js/components/ToolbarComponent.vue")["default"]);
+Vue.component('navigation-drawer-component', __webpack_require__(/*! ./components/NavigationDrawerComponent.vue */ "./resources/js/components/NavigationDrawerComponent.vue")["default"]);
 Vue.component('footer-component', __webpack_require__(/*! ./components/FooterComponent.vue */ "./resources/js/components/FooterComponent.vue")["default"]);
 
 
