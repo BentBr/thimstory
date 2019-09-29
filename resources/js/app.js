@@ -23,6 +23,7 @@ Vue.component('login-form-component', require('./components/LoginFormComponent.v
 Vue.component('toolbar-component', require('./components/ToolbarComponent.vue').default);
 Vue.component('navigation-drawer-component', require('./components/NavigationDrawerComponent.vue').default);
 Vue.component('footer-component', require('./components/FooterComponent.vue').default);
+Vue.component('add-story-detail-component', require('./components/AddStoryDetailComponent.vue').default);
 
 
 import Vuetify, {
@@ -58,7 +59,7 @@ import Vuetify, {
     VSelect,
     VFooter,
     VDivider,
-    VCheckbox,
+    VFileInput,
 } from 'vuetify/lib'
 import Vuex from 'vuex'
 import store from './store'
@@ -98,6 +99,7 @@ Vue.use(Vuetify, {
         VSelect,
         VFooter,
         VDivider,
+        VFileInput,
     },
     directives: {
         Ripple,
@@ -105,12 +107,6 @@ Vue.use(Vuetify, {
 })
 
 Vue.use(Vuex)
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
 
 const app = new Vue({
     el: '#app',
