@@ -4,6 +4,7 @@
         :clipped="$vuetify.breakpoint.lgAndUp"
         app
         right
+        dark
     >
         <v-list dense>
             <template v-for="item in items">

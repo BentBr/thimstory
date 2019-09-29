@@ -3,9 +3,8 @@
         <NavigationDrawerComponent />
 
         <v-app-bar
-            :clipped-left="$vuetify.breakpoint.lgAndUp"
+            :clipped-right="$vuetify.breakpoint.lgAndUp"
             app
-            color="blue darken-3"
             dense
             dark
             flat
