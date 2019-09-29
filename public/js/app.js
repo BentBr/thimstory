@@ -1730,12 +1730,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "FooterComponent",
-  data: function data() {
-    return {
-      icons: ['mdi-home', 'mdi-email', 'mdi-calendar', 'mdi-delete']
-    };
+  props: {
+    navigation: {
+      home: {
+        name: 'home',
+        icon: 'mdi-home',
+        text: null,
+        target: null
+      },
+      imprint: {
+        name: 'imprint',
+        icon: 'mdi-format-section',
+        text: null,
+        target: null
+      },
+      about: {
+        name: 'about',
+        icon: 'mdi-cow',
+        text: null,
+        target: null
+      },
+      privacyPolicy: {
+        name: 'privacyPolicy',
+        icon: 'mdi-fingerprint',
+        text: null,
+        target: null
+      }
+    },
+    company: null
   },
   computed: {
     localAttrs: function localAttrs() {
@@ -1811,6 +1837,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../store */ "./resources/js/store.js");
+//
 //
 //
 //
@@ -1973,7 +2000,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _NavigationDrawerComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NavigationDrawerComponent.vue */ "./resources/js/components/NavigationDrawerComponent.vue");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store */ "./resources/js/store.js");
-//
 //
 //
 //
@@ -39692,24 +39718,34 @@ var render = function() {
       _c(
         "v-card",
         {
-          staticClass: "red lighten-1 text-center",
-          attrs: { flat: "", tile: "", width: "100%" }
+          staticClass: "text-center",
+          attrs: { flat: "", tile: "", width: "100%", dark: "" }
         },
         [
           _c(
             "v-card-text",
-            _vm._l(_vm.icons, function(icon) {
+            _vm._l(_vm.navigation, function(element) {
               return _c(
                 "v-btn",
                 {
-                  key: icon,
-                  staticClass: "mx-4",
-                  attrs: { icon: "", href: "" }
+                  key: element.name,
+                  attrs: {
+                    icon: "",
+                    alt: element.text,
+                    title: element.text,
+                    href: element.target
+                  }
                 },
                 [
-                  _c("v-icon", { attrs: { size: "24px" } }, [
-                    _vm._v(_vm._s(icon))
-                  ])
+                  _c(
+                    "v-icon",
+                    {
+                      attrs: {
+                        size: _vm.$vuetify.breakpoint.lgAndUp ? "24px" : "18px"
+                      }
+                    },
+                    [_vm._v(_vm._s(element.icon))]
+                  )
                 ],
                 1
               )
@@ -39721,7 +39757,7 @@ var render = function() {
           _vm._v(" "),
           _c("v-card-text", { staticClass: "white--text" }, [
             _vm._v("\n            " + _vm._s(new Date().getFullYear()) + " — "),
-            _c("strong", [_vm._v("Vuetify")])
+            _c("strong", [_vm._v(_vm._s(_vm.company))])
           ])
         ],
         1
@@ -39826,7 +39862,12 @@ var render = function() {
   return _c(
     "v-navigation-drawer",
     {
-      attrs: { clipped: _vm.$vuetify.breakpoint.lgAndUp, app: "", right: "" },
+      attrs: {
+        clipped: _vm.$vuetify.breakpoint.lgAndUp,
+        app: "",
+        right: "",
+        dark: ""
+      },
       model: {
         value: _vm.drawer,
         callback: function($$v) {
@@ -40034,9 +40075,8 @@ var render = function() {
         "v-app-bar",
         {
           attrs: {
-            "clipped-left": _vm.$vuetify.breakpoint.lgAndUp,
+            "clipped-right": _vm.$vuetify.breakpoint.lgAndUp,
             app: "",
-            color: "blue darken-3",
             dense: "",
             dark: "",
             flat: "",

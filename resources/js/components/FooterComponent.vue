@@ -8,24 +8,26 @@
             flat
             tile
             width="100%"
-            class="red lighten-1 text-center"
+            class="text-center"
+            dark
         >
             <v-card-text>
                 <v-btn
-                    v-for="icon in icons"
-                    :key="icon"
-                    class="mx-4"
+                    v-for="element in navigation"
+                    :key="element.name"
                     icon
-                    href
+                    :alt="element.text"
+                    :title="element.text"
+                    :href="element.target"
                 >
-                    <v-icon size="24px">{{ icon }}</v-icon>
+                    <v-icon :size="$vuetify.breakpoint.lgAndUp ? '24px' : '18px'">{{ element.icon }}</v-icon>
                 </v-btn>
             </v-card-text>
 
             <v-divider></v-divider>
 
             <v-card-text class="white--text">
-                {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+                {{ new Date().getFullYear() }} — <strong>{{ company }}</strong>
             </v-card-text>
         </v-card>
     </v-footer>
@@ -34,14 +36,20 @@
 <script>
     export default {
         name: "FooterComponent",
-        data: () => ({
-            icons: [
-                'mdi-home',
-                'mdi-email',
-                'mdi-calendar',
-                'mdi-delete',
-            ],
-        }),
+        props: {
+            navigation: {
+                home: {
+                    name: 'home', icon: 'mdi-home', text: null, target: null},
+                imprint: {
+                    name: 'imprint', icon: 'mdi-format-section', text: null, target: null},
+                about: {
+                    name: 'about', icon: 'mdi-cow', text: null, target: null},
+                privacyPolicy: {
+                    name: 'privacyPolicy', icon: 'mdi-fingerprint', text: null, target: null},
+            },
+            company: null,
+        },
+
         computed: {
             localAttrs () {
                 const attrs = {}

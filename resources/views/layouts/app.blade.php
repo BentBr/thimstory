@@ -28,12 +28,6 @@
             <v-container class="fill-height" fluid>
                     <v-row>
 
-                    <nav>
-                        <a href="{{ Route('home') }}">Home</a>
-                        <a href="{{ Route('imprint') }}">Imprint</a>
-                        <a href="{{ Route('about') }}">About</a>
-                        <a href="{{ Route('privacy-policy') }}">Privacy Policy</a>
-                    </nav>
                     @auth()
                         <span>Welcome {{ Auth::user()->name }}, you are logged in!</span>
                         <v-list>
