@@ -39,6 +39,7 @@
         <v-btn
             icon
             large
+            @click.stop="toggleLoginRegister"
         >
             <v-avatar
                 size="32px"
@@ -54,7 +55,6 @@
 </template>
 
 <script>
-    import NavigationDrawerComponent from "./NavigationDrawerComponent.vue"
     import store from "../store";
 
     export default {
@@ -67,6 +67,9 @@
         methods: {
             toggleDrawer() {
                 store.dispatch('toggleDrawer')
+            },
+            toggleLoginRegister() {
+                store.dispatch('toggleLoginRegister')
             }
         }
     };

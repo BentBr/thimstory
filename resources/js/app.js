@@ -24,6 +24,7 @@ Vue.component('toolbar-component', require('./components/ToolbarComponent.vue').
 Vue.component('navigation-drawer-component', require('./components/NavigationDrawerComponent.vue').default);
 Vue.component('footer-component', require('./components/FooterComponent.vue').default);
 Vue.component('add-story-detail-component', require('./components/AddStoryDetailComponent.vue').default);
+Vue.component('login-register-component', require('./components/LoginRegisterComponent.vue').default);
 
 
 import Vuetify, {

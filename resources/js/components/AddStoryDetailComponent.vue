@@ -1,5 +1,5 @@
 <template>
-    <div id="AddStoryDetailButton">
+    <div id="AddStoryDetailOverlay">
         <v-btn
             bottom
             color="pink"
@@ -17,6 +17,7 @@
         <v-dialog
             v-model="dialogStoryDetail"
             max-width="600"
+            v-on:click:outside="dialogStoryDetail = !dialogStoryDetail"
         >
             <v-form :action="route" enctype="multipart/form-data">
 
@@ -70,6 +71,8 @@
 </template>
 
 <script>
+    import store from "../store";
+
     export default {
         name: "AddStoryDetailComponent",
         props: {
@@ -113,7 +116,7 @@
                         formData.append(fieldName, imageFile)
                     }
                 }
-            }
+            },
         }
     }
 </script>

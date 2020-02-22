@@ -72,10 +72,20 @@
 
         @auth()
             @if(is_null($newStoryDetail))
+                <!-- include of new story detail overlay if logged in and eligible -->
                 @include('stories.add-story-detail')
             @endif
+                <!-- include profile overlay if logged in -->
+                @include('users.profile-detail')
         @endauth
 
+        @guest()
+            <!-- include login overlay if not logged in -->
+            @include('auth.login')
+        @endguest
+
+
+        <!-- include of footer element -->
         @include('menus.footer')
     </v-app>
 </body>
