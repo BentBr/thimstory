@@ -7,13 +7,20 @@
         flat
         hide-on-scroll
     >
+
         <v-toolbar-title
             style="width: 300px"
             class="ml-0 pl-4"
         >
+
             <v-app-bar-nav-icon @click.stop="toggleDrawer"></v-app-bar-nav-icon>
-            <span class="hidden-sm-and-down">{{ company }}</span>
+            <v-btn
+                text
+                href="/">
+                <span class="hidden-sm-and-down">{{ company }}</span>
+            </v-btn>
         </v-toolbar-title>
+
         <v-text-field
             flat
             solo-inverted

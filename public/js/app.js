@@ -2176,6 +2176,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -40384,8 +40391,10 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _c("span", { staticClass: "hidden-sm-and-down" }, [
-            _vm._v(_vm._s(_vm.company))
+          _c("v-btn", { attrs: { text: "", href: "/" } }, [
+            _c("span", { staticClass: "hidden-sm-and-down" }, [
+              _vm._v(_vm._s(_vm.company))
+            ])
           ])
         ],
         1
