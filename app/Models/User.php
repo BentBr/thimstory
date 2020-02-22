@@ -11,6 +11,7 @@ use Str;
 use thimstory\Models\Concerns\UsesUuid;
 use Illuminate\Database\Eloquent;
 use thimstory\Models\UserSubscriptions;
+use thimstory\Models\Stories;
 
 class User extends Authenticatable
 {
@@ -251,5 +252,18 @@ class User extends Authenticatable
 
             return $this->new_story_detail_possible_at->diffForHumans();
         }
+    }
+
+    /** Returns all user's stories with latest on top
+     *
+     * @return Eloquent\Relations\HasMany
+     */
+    public function getAllUsersStoriesSorted()
+    {
+        $stories = $this->stories()->get();
+
+        !is_null($stories) ?  $stories->sortBy('updated_at') : null;
+
+        return $stories;
     }
 }

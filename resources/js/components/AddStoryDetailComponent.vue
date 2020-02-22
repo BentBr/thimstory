@@ -30,28 +30,29 @@
                             :cols="$vuetify.breakpoint.mdAndUp ? 8 : 12"
                         >
                                 <v-select
+                                    prepend-icon="mdi-image-area"
                                     name="story_id"
-                                    :label="label"
-                                    :items="items"
+                                    :label="selectlabel"
+                                    :items="selectitems"
                                     solo
                                 >
                                 </v-select>
 
                                 <v-file-input
                                     prepend-icon="mdi-image-area"
-                                    :placeholder="placeholder"
+                                    :label="filelabel"
                                     loading="true"
                                     id="story_detail"
                                     accept="image/*"
                                     solo
-                                    @change="onFileChange(          $event.target.name, $event.target.files)"
+                                    @change="onFileChange($event.target.name, $event.target.files)"
                                 ></v-file-input>
                         </v-col>
 
                     </v-container>
                     <v-card-actions>
                         <input type="hidden" name="_method" value="PUT">
-                        <input type="hidden" name="_token" :value="csrfToken">
+                        <input type="hidden" name="_token" :value="csrftoken">
                         <v-btn
                             text
                             color="primary"
@@ -73,11 +74,11 @@
         name: "AddStoryDetailComponent",
         props: {
             value: Object,
-            label: null,
-            placeholder: null,
-            csrfToken: null,
+            selectlabel: null,
+            filelabel: null,
+            csrftoken: null,
             route: null,
-            items: {
+            selectitems: {
             },
         },
         data: () => ({

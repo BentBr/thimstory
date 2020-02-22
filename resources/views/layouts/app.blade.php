@@ -14,7 +14,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    @include('layouts.matomo-header')
+    <?php //@include('layouts.matomo-header')?>
 </head>
 <body>
     @include('layouts.matomo-body')
@@ -67,15 +67,14 @@
                     @endguest
                     @yield('content')
                     </v-row>
-
             </v-container>
         </v-content>
 
         @auth()
-            @if(is_null(Auth()->user()->getDateForNextStory()))
+            @if(is_null($newStoryDetail))
+                @include('stories.add-story-detail')
             @endif
         @endauth
-        @include('stories.add-story-detail')
 
         @include('menus.footer')
     </v-app>
