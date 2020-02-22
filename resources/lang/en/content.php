@@ -10,8 +10,10 @@ return [
     'stories' => [
         'views'         => 'Views',
         'you-can-add'   => 'You can add a',
-        'new-story'     => 'new Story',
-        'new-detail'    => 'new Detail',
+        'new-story'     => 'New Story',
+        'new-detail'    => 'New Detail',
+        'select-story'  => 'Select Story',
+        'select-image'  => 'Select Image',
     ],
 
 ];

@@ -32,15 +32,15 @@
                                 <v-select
                                     prepend-icon="mdi-image-area"
                                     name="story_id"
-                                    :label="selectlabel"
-                                    :items="selectitems"
+                                    :label="selectLabel"
+                                    :items="selectItems"
                                     solo
                                 >
                                 </v-select>
 
                                 <v-file-input
                                     prepend-icon="mdi-image-area"
-                                    :label="filelabel"
+                                    :label="fileLabel"
                                     loading="true"
                                     id="story_detail"
                                     accept="image/*"
@@ -52,7 +52,7 @@
                     </v-container>
                     <v-card-actions>
                         <input type="hidden" name="_method" value="PUT">
-                        <input type="hidden" name="_token" :value="csrftoken">
+                        <input type="hidden" name="_token" :value="CSRFToken">
                         <v-btn
                             text
                             color="primary"
@@ -74,11 +74,11 @@
         name: "AddStoryDetailComponent",
         props: {
             value: Object,
-            selectlabel: null,
-            filelabel: null,
-            csrftoken: null,
+            selectLabel: null,
+            fileLabel: null,
+            CSRFToken: null,
             route: null,
-            selectitems: {
+            selectItems: {
             },
         },
         data: () => ({
