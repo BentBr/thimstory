@@ -6,6 +6,8 @@ return [
         'company'       => 'Thimstory',
         'add'           => 'Add',
         'cancel'        => 'Cancel',
+        'login'         => 'Login',
+        'send'          => 'Send',
     ],
     'stories' => [
         'views'         => 'Views',

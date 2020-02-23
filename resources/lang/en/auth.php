@@ -21,7 +21,9 @@ return [
         'register-mail-sent'    => 'A register link has been sent!',
         'login'                 => 'Login',
         'successfully-login'    => "You have successfully been logged in!",
-        'email'                 => 'Email Address'
+        'email'                 => 'Email Address',
+        'description-login'     => 'If you are already registered - login here!',
+        'description-register'  => 'If you are new - register here!'
     ],
 
     'logout'    => [
