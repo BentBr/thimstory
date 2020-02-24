@@ -17,4 +17,3 @@
     :old-input="'{{ old('email') }}'"
 >
 </login-register-component>
-some test
