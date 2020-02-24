@@ -43,10 +43,12 @@
                         <input type="hidden" name="_token" :value="CSRFToken">
                         <v-btn
                             text
-                            color="primary"
+                            color="secondary"
+                            @click="toggleLoginRegister() & clearInput()"
                         >{{ cancel }}</v-btn>
                         <v-btn
                             text
+                            color="primary"
                             type="submit"
                         >{{ login }}</v-btn>
                     </v-card-actions>
@@ -91,6 +93,9 @@
         methods: {
             toggleLoginRegister() {
                 store.dispatch('toggleLoginRegister')
+            },
+            clearInput() {
+                this.email = ''
             }
         },
         computed: {
