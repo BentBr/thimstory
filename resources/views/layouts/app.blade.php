@@ -81,7 +81,7 @@
 
         @guest()
             <!-- include login overlay if not logged in -->
-            @include('auth.login')
+            @include('users.login-overlay')
         @endguest
 
 

@@ -12,5 +12,8 @@
     :email-valid-validation="'@lang('validation.email-required', ['attribute' => $emailName])'"
     :cancel="'@lang('content.meta.cancel')'"
     :login="'@lang('content.meta.login')'"
+    :login-route="'{{ route('login') }}'"
+    :error="'@error('email') {{ $message }} @enderror'"
+    :old-input="'{{ old('email') }}'"
 >
 </login-register-component>

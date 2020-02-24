@@ -4,6 +4,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+import Axios from "axios";
+
 require('./bootstrap');
 
 window.Vue = require('vue');
@@ -60,10 +62,13 @@ import Vuetify, {
     VFooter,
     VDivider,
     VFileInput,
+    VProgressCircular,
 } from 'vuetify/lib'
 import Vuex from 'vuex'
 import store from './store'
 import { Ripple } from 'vuetify/lib/directives'
+import VueAxios from 'vue-axios'
+import axios from 'axios'
 
 Vue.use(Vuetify, {
     components: {
@@ -100,16 +105,18 @@ Vue.use(Vuetify, {
         VFooter,
         VDivider,
         VFileInput,
+        VProgressCircular,
     },
     directives: {
         Ripple,
     },
 })
 
-Vue.use(Vuex)
+Vue.use(Vuex, VueAxios, axios)
 
 const app = new Vue({
     el: '#app',
     vuetify: new Vuetify(),
     store,
+    axios,
 });

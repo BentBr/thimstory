@@ -6,6 +6,7 @@
             v-on:click:outside="toggleLoginRegister"
         >
             <v-form :action="route" enctype="multipart/form-data">
+                <input type="hidden" name="_method" value="PUT">
 
                 <v-card>
                     <v-card-title class="grey darken-2">
@@ -26,6 +27,7 @@
                                 <v-form v-model="valid">
                                     <v-container>
                                         <v-text-field
+                                            :name="email"
                                             v-model="email"
                                             :rules="emailRules"
                                             :label="emailName"
@@ -34,7 +36,6 @@
                                     </v-container>
                                 </v-form>
                             </v-row>
-
                         </v-col>
 
                     </v-container>
@@ -44,12 +45,14 @@
                         <v-btn
                             text
                             color="secondary"
-                            @click="toggleLoginRegister() & clearInput()"
+                            @click="toggleLoginRegister(); clearInput();"
                         >{{ cancel }}</v-btn>
                         <v-btn
+                            :loading="loading"
+                            :disabled="loading"
                             text
                             color="primary"
-                            type="submit"
+                            @click="sendLoginRequest(); loader = 'loading';"
                         >{{ login }}</v-btn>
                     </v-card-actions>
 
@@ -60,7 +63,8 @@
 </template>
 
 <script>
-    import store from "../store";
+    import store from '../store';
+    import axios from 'axios';
 
     export default {
         name: "LoginRegisterComponent",
@@ -77,6 +81,9 @@
             emailValidValidation: null,
             cancel: null,
             login: null,
+            loginRoute: null,
+            oldInput: null,
+            error: null,
         },
         data () {
             return {
@@ -88,6 +95,8 @@
                     v => !!v || this.emailRequiredValidation,
                     v => /.+@.+/.test(v) || this.emailValidValidation
                 ],
+                loader: null,
+                loading: false,
             }
         },
         methods: {
@@ -96,6 +105,9 @@
             },
             clearInput() {
                 this.email = ''
+            },
+            sendLoginRequest() {
+                axios.put('/login', {email: this.email, remember: true, _token: this.CSRFToken});
             }
         },
         computed: {
@@ -105,6 +117,14 @@
                 },
                 set: function() {
                 }
+            },
+        },
+        watch: {
+            loader () {
+                const l = this.loader
+                this[l] = !this[l]
+                setTimeout(() => (this[l] = false), 3000)
+                this.loader = null
             },
         },
     }
