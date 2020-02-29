@@ -63,6 +63,7 @@ import Vuetify, {
     VDivider,
     VFileInput,
     VProgressCircular,
+    VSnackbar,
 } from 'vuetify/lib'
 import Vuex from 'vuex'
 import store from './store'
@@ -106,6 +107,7 @@ Vue.use(Vuetify, {
         VDivider,
         VFileInput,
         VProgressCircular,
+        VSnackbar,
     },
     directives: {
         Ripple,

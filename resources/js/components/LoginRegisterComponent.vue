@@ -34,6 +34,15 @@
                                             :label="emailName"
                                             required
                                         ></v-text-field>
+                                        <v-snackbar
+                                            v-model="snackbar"
+                                            bottom
+                                            :timeout="2000"
+                                            color="success"
+                                            vertical
+                                        >
+                                            {{ message }}
+                                        </v-snackbar>
                                     </v-container>
                                 </v-form>
                             </v-row>
@@ -98,6 +107,8 @@
                 ],
                 loader: null,
                 loading: false,
+                message: null,
+                snackbar: false,
             }
         },
         methods: {
@@ -108,7 +119,11 @@
                 this.email = ''
             },
             sendLoginRequest() {
-                axios.put('/login', {email: this.email, remember: true, _token: this.CSRFToken});
+                axios.put('/login', {email: this.email, remember: true, _token: this.CSRFToken, axiosLogin: true})
+                .then(response => {
+                    this.message = response.data.message;
+                    this.snackbar = true;
+                });
             }
         },
         computed: {
@@ -124,7 +139,7 @@
             loader () {
                 const l = this.loader
                 this[l] = !this[l]
-                setTimeout(() => (this[l] = false), 3000)
+                setTimeout(() => (this[l] = false), 2000)
                 this.loader = null
             },
         },

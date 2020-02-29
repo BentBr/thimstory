@@ -51,19 +51,21 @@ class UserController extends Controller
     }
 
     /**
-     * send mail to provided address
-     * If user does not exist -> creates new user
+     *      send mail to provided address
+     *      If user does not exist -> creates new user
      *
      * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\View\View
      */
     public function putLogin(Request $request)
     {
         $request->validate([
             'email' => 'email|required',
+            'remember' => 'boolean|required',
+            'axiosLogin' => 'boolean|nullable'
         ]);
 
-        //check if user exists
+        //check if user exists and sent login mail
         try {
             $user = User::getUserByEmail($request->email);
 
@@ -74,7 +76,7 @@ class UserController extends Controller
             event(new UserLogin($user));
 
             //setup hint for Frontend
-            $data['hint'] = Lang::get('auth.login-mail-sent');
+            $data['hint'] = Lang::get('auth.login.login-mail-sent');
         } catch (Exception $exception) {
 
             //revalidate for uniqueness
@@ -94,8 +96,16 @@ class UserController extends Controller
                 event(new UserRegister($user));
 
                 //setup hint
-                $data['hint'] = Lang::get('auth.register-mail-sent');
+                $data['hint'] = Lang::get('auth.login.register-mail-sent');
             }
+        }
+        //making sure on axios usage only json is being responded
+        if($request->axiosLogin) {
+
+            return response()->json([
+                'status'    => 'success',
+                'message'   =>  $data['hint']
+            ]);
         }
 
         return view('users.login', $data);
