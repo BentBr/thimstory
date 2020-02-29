@@ -26,6 +26,8 @@ Vue.component('navigation-drawer-component', require('./components/NavigationDra
 Vue.component('footer-component', require('./components/FooterComponent.vue').default);
 Vue.component('add-story-detail-component', require('./components/AddStoryDetailComponent.vue').default);
 Vue.component('login-register-component', require('./components/LoginRegisterComponent.vue').default);
+Vue.component('login-register-navbar-button-component', require('./components/LoginRegisterNavbarButtonComponent.vue').default);
+Vue.component('profile-navbar-button-component', require('./components/ProfileNavbarButtonComponent.vue').default);
 
 
 import Vuetify, {

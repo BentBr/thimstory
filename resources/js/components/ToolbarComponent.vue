@@ -36,21 +36,17 @@
         <v-btn icon>
             <v-icon>mdi-bell</v-icon>
         </v-btn>
-        <v-btn
-            icon
-            large
-            @click.stop="toggleLoginRegister"
-        >
-            <v-avatar
-                size="32px"
-                item
-            >
-                <v-img
-                    src="https://cdn.vuetifyjs.com/images/logos/logo.svg"
-                    alt="Vuetify"
-                >
-                </v-img></v-avatar>
-        </v-btn>
+
+        <profile-navbar-button-component
+            v-if=login
+            :avatarUrl=avatarUrl
+            :altText=altText
+        ></profile-navbar-button-component>
+        <login-register-navbar-button-component
+            v-else
+            :altText=altText
+        ></login-register-navbar-button-component>
+
     </v-app-bar>
 </template>
 
@@ -59,18 +55,17 @@
 
     export default {
         name: "ToolbarComponent",
-
         props: {
             company: null,
+            avatarUrl: null,
+            altText: null,
+            login: false,
         },
-
         methods: {
             toggleDrawer() {
                 store.dispatch('toggleDrawer')
             },
-            toggleLoginRegister() {
-                store.dispatch('toggleLoginRegister')
-            }
+
         }
     };
 </script>

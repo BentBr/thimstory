@@ -266,4 +266,16 @@ class User extends Authenticatable
 
         return $stories;
     }
+
+    /**
+     * The avatar being saved on gravater
+     * removed set support: &set=set1
+     *
+     *
+     * @return string
+     */
+    public function getAvatarUrl()
+    {
+        return "https://robohash.org/" . md5($this->email) . "?gravatar=hashed";
+    }
 }

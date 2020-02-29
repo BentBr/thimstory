@@ -113,7 +113,7 @@
         },
         methods: {
             toggleLoginRegister() {
-                store.dispatch('toggleLoginRegister')
+                store.dispatch('toggleLoginRegisterOverlay')
             },
             clearInput() {
                 this.email = ''

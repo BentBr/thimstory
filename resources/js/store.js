@@ -6,30 +6,56 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         drawer: false,
-        loginRegister: false
+        loginRegisterOverlay: false,
+        userIsLoggedIn: false,
+        profileOverlay: false,
     },
     getters: {
         getDrawerState(state) {
             return state.drawer
         },
         getLoginRegisterState(state) {
-            return state.loginRegister
+            return state.loginRegisterOverlay
+        },
+        getUserLoginState(state) {
+            return state.userIsLoggedIn
+        },
+        getProfileOverlay(state) {
+            return state.profileOverlay
         }
     },
     actions: {
         toggleDrawer(drawer) {
             drawer.commit('setDrawer')
         },
-        toggleLoginRegister(loginRegister) {
-            loginRegister.commit('setLoginRegister')
+        toggleLoginRegisterOverlay(loginRegister) {
+            loginRegister.commit('setLoginRegisterOverlay')
+        },
+        logUserIn(userIsLoggedIn) {
+            userIsLoggedIn.commit('setUserToLoggedIn')
+        },
+        logUserOut(userIsLoggedIn) {
+            userIsLoggedIn.commit('setUserToLoggedOut')
+        },
+        toggleProfileOverlay(profileOverlay) {
+            profileOverlay.commit('setProfileOverlay')
         }
     },
     mutations: {
         setDrawer() {
             this.state.drawer = !this.state.drawer;
         },
-        setLoginRegister() {
-            this.state.loginRegister = !this.state.loginRegister;
+        setLoginRegisterOverlay() {
+            this.state.loginRegisterOverlay = !this.state.loginRegisterOverlay;
+        },
+        setUserToLoggedIn() {
+            this.state.userIsLoggedIn = true;
+        },
+        setUserToLoggedOut() {
+            this.state.userIsLoggedIn = false;
+        },
+        setProfileOverlay() {
+            this.state.profileOverlay = !this.state.profileOverlay;
         }
     },
 });
