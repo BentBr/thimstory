@@ -13,6 +13,7 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('login') }}">
                             <input type="hidden" name="_method" value="PUT">
+                            <input type="hidden" name="axios_login" id="axios_login" value="false">
                             @csrf
 
                             <div class="form-group row">

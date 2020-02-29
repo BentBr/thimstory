@@ -59,10 +59,11 @@ class UserController extends Controller
      */
     public function putLogin(Request $request)
     {
+
         $request->validate([
-            'email' => 'email|required',
-            'remember' => 'boolean|required',
-            'axiosLogin' => 'boolean|nullable'
+            'email'         => 'email|required',
+            'remember'      => 'required',
+            'axios_login'   => 'required',
         ]);
 
         //check if user exists and sent login mail
