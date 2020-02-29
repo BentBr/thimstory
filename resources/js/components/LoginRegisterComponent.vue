@@ -27,7 +27,8 @@
                                 <v-form v-model="valid">
                                     <v-container>
                                         <v-text-field
-                                            :name="email"
+                                            id="email-input"
+                                            name="email"
                                             v-model="email"
                                             :rules="emailRules"
                                             :label="emailName"
@@ -131,5 +132,4 @@
 </script>
 
 <style scoped>
-
 </style>
