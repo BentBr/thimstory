@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('new_story_possible_at')->default(now());
             $table->timestamp('new_story_detail_possible_at')->default(now());
             $table->rememberToken()->index();
+            $table->string('login_token')->index()->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -26,6 +26,11 @@ class UserController extends Controller
      */
     public function profile($username)
     {
+
+        if(Auth::viaRemember()) {
+            dd(Auth::user());
+        }
+
         //getting requested data
         $data['user'] = User::getUserByUsername($username);
         $data['stories'] = $data['user']->stories;
@@ -44,7 +49,11 @@ class UserController extends Controller
         return view('users.profile', $data);
     }
 
-    //shows profile view of requested user
+    /**
+     * shows profile view of requested user
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\View\View
+     */
     public function login()
     {
         return view('users.login');
@@ -62,7 +71,6 @@ class UserController extends Controller
 
         $request->validate([
             'email'         => 'email|required',
-            'remember'      => 'required',
             'axiosLogin'   => 'required',
         ]);
 
@@ -71,7 +79,7 @@ class UserController extends Controller
             $user = User::getUserByEmail($request->email);
 
             //set new token for login
-            $user->generateToken();
+            $user->generateLoginToken();
 
             //send login mail
             event(new UserLogin($user));
@@ -91,7 +99,7 @@ class UserController extends Controller
                 //creating new user based on email
                 $user           = new User;
                 $user->createUserWithEmail($request->email);
-                $user->generateToken();
+                $user->generateLoginToken();
 
                 //send register mail
                 event(new UserRegister($user));
@@ -101,7 +109,7 @@ class UserController extends Controller
             }
         }
         //making sure on axios usage only json is being responded
-        if($request->axiosLogin) {
+        if($request->axiosLogin === true) {
 
             return response()->json([
                 'status'    => 'success',
@@ -113,7 +121,7 @@ class UserController extends Controller
     }
 
     /**
-     * Login with token /login/{token}
+     * Login with login token /login/{token}
      *
      * @param $token
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
@@ -121,15 +129,15 @@ class UserController extends Controller
     public function userLoginWithToken($token)
     {
         //find user via token
-        $user = User::getUserByToken($token);
+        $user = User::getUserByLoginToken($token);
 
         //login user
         $this->guard()->login($user, true);
 
         //delete token
-        $user->deleteToken();
+        $user->deleteLoginToken();
 
-        //verify email address
+        //verify email address if not yet done
         if(is_null($user->email_verified_at)) {
 
             $user->verifyEmail();
@@ -141,7 +149,7 @@ class UserController extends Controller
     /**
      * Users Logout
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function logout()
     {
@@ -186,13 +194,13 @@ class UserController extends Controller
     public function deleteUser($token)
     {
         //find user via token
-        $user = User::getUserByToken($token);
+        $user = User::getUserByLoginToken($token);
 
         //delete user
         $user->deleteUser();
 
         //delete token
-        $user->deleteToken();
+        $user->deleteLoginToken();
 
         return redirect(Route('home'));
     }
@@ -205,7 +213,7 @@ class UserController extends Controller
     public function sendDeleteVerificationMail()
     {
         $user       = User::findOrFail(Auth::user()->id);
-        $user->generateToken();
+        $user->generateLoginToken();
 
         //fire event for sending deletion mail
         event(new UserDelete($user));

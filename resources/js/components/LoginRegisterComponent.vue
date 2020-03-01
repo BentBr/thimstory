@@ -119,7 +119,7 @@
                 this.email = ''
             },
             sendLoginRequest() {
-                axios.put('/login', {email: this.email, remember: true, _token: this.CSRFToken, axiosLogin: true})
+                axios.put('/login', {email: this.email, _token: this.CSRFToken, axiosLogin: true})
                 .then(response => {
                     this.message = response.data.message;
                     this.snackbar = true;

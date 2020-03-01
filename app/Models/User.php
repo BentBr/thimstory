@@ -99,9 +99,9 @@ class User extends Authenticatable
      * @param $token
      * @return mixed
      */
-    public static function getUserByToken($token)
+    public static function getUserByLoginToken($token)
     {
-        return User::where('remember_token', $token)
+        return User::where('login_token', $token)
                 ->firstOrFail();
     }
 
@@ -110,12 +110,12 @@ class User extends Authenticatable
      *
      * @return bool
      */
-    public function generateToken()
+    public function generateLoginToken()
     {
-        $this->remember_token = Str::random(100);
+        $this->login_token = Str::random(100);
 
         return $this->update([
-            'remember_token'    => $this->remember_token,
+            'login_token'    => $this->login_token,
         ]);
     }
 
@@ -124,10 +124,10 @@ class User extends Authenticatable
      *
      * @return bool
      */
-    public function deleteToken()
+    public function deleteLoginToken()
     {
         return $this->forceFill([
-            'remember_token'    => null,
+            'login_token'    => null,
         ])->save();
     }
 

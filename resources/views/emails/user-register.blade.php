@@ -6,7 +6,7 @@
     <br>
 
     @component('mail::button', [
-    'url' => url('/login/' . $user->remember_token)
+    'url' => url('/login/' . $user->login_token)
     ])
         Register!
     @endcomponent
