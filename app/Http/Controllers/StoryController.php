@@ -9,6 +9,7 @@ use Auth;
 use Illuminate\Http\Request;
 use File;
 use thimstory\Models\UserSubscriptions;
+use Lang;
 
 class StoryController extends Controller
 {
@@ -188,7 +189,8 @@ class StoryController extends Controller
      * redirects to detail afterwards
      *
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \thimstory\Exceptions\NotYetAllowedToCreateException
      */
     public function putStoryDetails(Request $request)
     {
@@ -215,8 +217,18 @@ class StoryController extends Controller
 
         $request->story_detail->move(public_path('storyDetails'), $storyDetail->id); //todo: must be changed to external storage (S3?)
 
+        return response()->json([
+            'status'    => 'success',
+            'message'   => Lang::get('content.status_messages.success_storyDetail'),
+            'route'     => route('storyDetail', [
+                $user->getName(),
+                $story->name,
+                $storyDetail->story_counter
+            ]),
+        ]);
+
         return redirect(Route('storyDetail', [
-                    'username' => $user->name,
+                    'username' => $user->getName(),
                     'story' => $story->name,
                     'storyCounter' => $storyDetail->story_counter,
                 ]));

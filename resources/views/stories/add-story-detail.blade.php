@@ -6,8 +6,11 @@
         value: '{{ $story->id }}'},
     @endforeach]"
     :file-label="'some'"
-    :CSRF-token="'{{ csrf_token() }}'"
-    :maxSize="1024"
+    :csrf-token="'{{ csrf_token() }}'"
+    :max-size="1024"
+    :route="'{{ route('putStoryDetails') }}'"
+    :send-name="'@lang('content.meta.add')'"
+    :cancel-name="'@lang('content.meta.cancel')'"
     >
 </add-story-detail-component>
 
