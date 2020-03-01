@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Str;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use thimstory\Models\Concerns\UsesUuid;
 use Illuminate\Database\Eloquent;
 use thimstory\Models\UserSubscriptions;
@@ -94,19 +95,40 @@ class User extends Authenticatable
     }
 
     /**
-     * finds user by remember_token in table users
+     * Finds user by user id. Checks for login_token of user in given token
+     * accepts base64 token with id: and token: (json)
      *
      * @param $token
      * @return mixed
      */
-    public static function getUserByLoginToken($token)
+    public static function getUserByLoginTokenBase64($token)
     {
-        return User::where('login_token', $token)
-                ->firstOrFail();
+        $tokenArray = json_decode(base64_decode($token));
+        $id = $tokenArray->id;
+        $token = $tokenArray->token;
+
+        $user = User::findOrFail($id);
+        if ($user->checkLoginToken($token)){
+
+            return $user;
+        }
+        throw new NotFoundHttpException();
+    }
+
+    /**
+     * Returns if given token is correct for current user
+     *
+     * @param $token
+     * @return bool
+     */
+    public function checkLoginToken($token)
+    {
+        return $this->login_token == $token;
     }
 
     /**
      * Generates new remember token for login / deletion
+     * true if successful, false if not
      *
      * @return bool
      */
@@ -121,6 +143,7 @@ class User extends Authenticatable
 
     /**
      * Deletes token of current user. preferably after successfully login
+     * true if successful, false if not
      *
      * @return bool
      */
@@ -133,6 +156,7 @@ class User extends Authenticatable
 
     /**
      * verifies email address of current user by setting timestamp = now
+     * true if successful, false if not
      *
      * @return bool
      */
@@ -145,6 +169,7 @@ class User extends Authenticatable
 
     /**
      * Creates user with provided email address
+     * true if successful, false if not
      *
      * @param $email
      * @return bool
@@ -164,6 +189,7 @@ class User extends Authenticatable
 
     /**
      * Updates user in DB according to given user's object
+     * true if successful, false if not
      *
      * @return bool
      */
@@ -177,7 +203,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Deletes user (softdelete)
+     * Deletes user (soft delete)
      *
      * @return bool|null
      * @throws \Exception
@@ -277,5 +303,19 @@ class User extends Authenticatable
     public function getAvatarUrl()
     {
         return "https://robohash.org/" . md5($this->email) . "?gravatar=hashed";
+    }
+
+    /**
+     * Returning a json string encoded to base64 with user id and login_token
+     *
+     * @return string
+     */
+    public function getUserIdAndLoginTokenBase64()
+    {
+        $data = [
+            'id'        => $this->id,
+            'token'     => $this->login_token
+        ];
+        return base64_encode(json_encode($data));
     }
 }

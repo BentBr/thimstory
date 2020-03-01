@@ -6,7 +6,7 @@
     <br>
 
     @component('mail::button', [
-    'url' => url('/login/' . $user->login_token)
+    'url' => url('/login/' . $user->getUserIdAndLoginTokenBase64())
     ])
         Login!
     @endcomponent

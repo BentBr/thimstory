@@ -124,7 +124,7 @@ class UserController extends Controller
     public function userLoginWithToken($token)
     {
         //find user via token
-        $user = User::getUserByLoginToken($token);
+        $user = User::getUserByLoginTokenBase64($token);
 
         //login user
         $this->guard()->login($user, true);
@@ -189,7 +189,7 @@ class UserController extends Controller
     public function deleteUser($token)
     {
         //find user via token
-        $user = User::getUserByLoginToken($token);
+        $user = User::getUserByLoginTokenBase64($token);
 
         //delete user
         $user->deleteUser();

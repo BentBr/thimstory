@@ -6,7 +6,7 @@
     <br>
 
     @component('mail::button', [
-    'url' => url('/user/delete/' . $user->login_token)
+    'url' => url('/user/delete/' . $user->getUserIdAndLoginTokenBase64())
     ])
         Delete!
     @endcomponent
