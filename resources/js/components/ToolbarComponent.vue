@@ -41,6 +41,10 @@
             v-if=login
             :avatarUrl=avatarUrl
             :altText=altText
+            :profileUrl=profileUrl
+            :logoutUrl=logoutUrl
+            :profileName=profileName
+            :logoutName=logoutName
         ></profile-navbar-button-component>
         <login-register-navbar-button-component
             v-else
@@ -60,6 +64,10 @@
             avatarUrl: null,
             altText: null,
             login: false,
+            profileUrl: null,
+            logoutUrl: null,
+            profileName: null,
+            logoutName: null,
         },
         methods: {
             toggleDrawer() {

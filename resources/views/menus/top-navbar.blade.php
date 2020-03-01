@@ -6,6 +6,10 @@
         :avatar-url="'{{ Auth::user()->getAvatarUrl() }}'"
         :alt-text="'{{ Auth::user()->name }}'"
         :login="true"
+        :profile-url="'{{ route('profile', Auth::user()->getUrlName()) }}'"
+        :logout-url="'{{ route('logout') }}'"
+        :profile-name="'@lang('navigation.profile')'"
+        :logout-name="'@lang('auth.logout.logout')'"
     @endauth
     @guest()
         :alt-text="'@lang('auth.login.login')'"

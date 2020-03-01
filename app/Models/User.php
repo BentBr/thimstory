@@ -318,4 +318,24 @@ class User extends Authenticatable
         ];
         return base64_encode(json_encode($data));
     }
+
+    /**
+     * returns username in URL encoded version from database
+     *
+     * @return mixed
+     */
+    public function getUrlName()
+    {
+        return $this->url_name;
+    }
+
+    /**
+     * returns username ifrom database
+     *
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 }
