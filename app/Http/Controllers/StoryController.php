@@ -226,12 +226,6 @@ class StoryController extends Controller
                 $storyDetail->story_counter
             ]),
         ]);
-
-        return redirect(Route('storyDetail', [
-                    'username' => $user->getName(),
-                    'story' => $story->name,
-                    'storyCounter' => $storyDetail->story_counter,
-                ]));
     }
 
     /**
