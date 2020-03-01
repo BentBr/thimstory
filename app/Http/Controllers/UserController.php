@@ -26,11 +26,6 @@ class UserController extends Controller
      */
     public function profile($username)
     {
-
-        if(Auth::viaRemember()) {
-            dd(Auth::user());
-        }
-
         //getting requested data
         $data['user'] = User::getUserByUsername($username);
         $data['stories'] = $data['user']->stories;
