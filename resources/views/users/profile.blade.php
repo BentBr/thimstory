@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="flex-center position-ref full-height">
-                    {{ $user->name }}
+                    {{ $user->getName() }}
                     <br>
                     {{ $user->email }}
 
@@ -20,7 +20,7 @@
                                 @csrf
                                 <input type="hidden" name="_method" value="PUT">
                                 <input type="hidden" name="subscribed_user_id" value="{{ $user->id }}">
-                                <input type="hidden" name="location_redirect" value="/{{ $user->url_name }}">
+                                <input type="hidden" name="location_redirect" value="/{{ $user->getUrlName() }}">
                                 <br>
                                 @if(is_null($userSubscribed))
                                     <button type="submit" class="btn btn-primary"><span style="color:mediumblue">Subscribe</span></button>
@@ -43,7 +43,7 @@
                         <form method="POST" action="{{ route('patchUser') }}">
                             @csrf
                             <input type="hidden" name="_method" value="PATCH">
-                            <input type="text" name="name" id="name" value="{{ $user->name }}">
+                            <input type="text" name="name" id="name" value="{{ $user->getName() }}">
                             <input type="email" name="email" id="email" value="{{ $user->email }}">
                             <br>
                             <button type="submit" class="btn btn-primary">
@@ -63,7 +63,7 @@
                         <h2>User Stories</h2>
                         @if(isset($stories))
                             @foreach($stories as $story)
-                                <a href="/{{ $user->url_name }}/{{ $story->url_name }}">
+                                <a href="/{{ $user->getUrlName() }}/{{ $story->url_name }}">
                                     {{ $story->name }}
                                 </a><br>
                             @endforeach
@@ -75,8 +75,8 @@
                             @if(count($subscriptions['userSubscriptions']))
                                 <strong>User subs</strong><br>
                                 @foreach($subscriptions['userSubscriptions'] as $userSubscription)
-                                    <a href="/{{ $userSubscription->subscribedUser->url_name }}">
-                                        {{ $userSubscription->subscribedUser->name }}
+                                    <a href="/{{ $userSubscription->subscribedUser->getUrlName() }}">
+                                        {{ $userSubscription->subscribedUser->getName() }}
                                     </a><br>
                                 @endforeach
                             @endif

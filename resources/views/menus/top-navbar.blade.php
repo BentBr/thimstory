@@ -4,7 +4,7 @@
     :company="'@lang('content.meta.company')'"
     @auth()
         :avatar-url="'{{ Auth::user()->getAvatarUrl() }}'"
-        :alt-text="'{{ Auth::user()->name }}'"
+        :alt-text="'{{ Auth::user()->getName() }}'"
         :login="true"
         :profile-url="'{{ route('profile', Auth::user()->getUrlName()) }}'"
         :logout-url="'{{ route('logout') }}'"
